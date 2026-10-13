@@ -44,7 +44,7 @@ IP 形象「灰章鱼」与配图：
 ```
 
 ## 流程
-<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
+<p align="center"><img src="docs/showcase/workflow-16-9.png" width="900" alt="工作流"></p>
 
 
 审核官不通过就用 rejection 打回负责角色，返工后重新验收；全部通过后，大管家只向用户交付两样：`layout/` 里可直接粘贴进公众号的 HTML，和 `cover/` 里的 2.35:1 封面。
