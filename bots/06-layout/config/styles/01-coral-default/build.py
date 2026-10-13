@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """排版母版 v2.1（gzh-design-skill + 微信内容结构规范兼容）：python3 build.py 稿件.md out.html layout-map.json"""
-import re, sys, json, html
+import os, re, sys, json, html
 A="#F26B5B"; AL="#FDE9E6"; T="#2b2b2b"; G="#888"; LN="#eee"; BG="#f7f7f7"
 FONT=None  # 微信规范第3节：不设置 font-family，使用公众号默认字体栈
 S={
@@ -9,7 +9,7 @@ S={
  "subtitle":f"font-size:14px;color:{G};margin:0 0 18px;",
  "p":"margin:0 0 18px;text-align:left;",
  "strong":"font-weight:bold;color:#111;",
- # 重点句：珊瑚色底纹 / 马克笔下划线（底部 40% 半透明色带）
+ # 重点句：强调色底纹 / 马克笔下划线（底部 40% 半透明色带）
  "hl":f"background:{AL};color:#111;padding:1px 2px;border-radius:2px;",
  "marker":f"background-color:rgba(242,107,91,0.16);border-bottom:2px solid #F26B5B;color:#111;font-weight:bold;padding:0 1px;",
  "data":f"color:{A};font-weight:bold;font-size:17px;padding:0 1px;",
@@ -86,11 +86,14 @@ def compare_card(L,R,cfg):
       f'<td style="width:8%;vertical-align:middle;text-align:center;padding:0;border:0;font-size:13px;font-weight:bold;font-style:italic;color:#222;">vs</td>{col(R,True)}</tr></tbody></table></section>')
 def signature(cfg):
     sig=cfg.get("signature",{})
-    av=sig.get("avatar","assets/octo-sign.png"); w=imgw(av); dw=f' data-w="{w}"' if w else ""
-    name=html.escape(sig.get("name","Awei")); main=html.escape(sig.get("main","每天5分钟，看懂AI第一线")); sub=html.escape(sig.get("sub","关注我，一起把 AI 看明白"))
+    av=sig.get("avatar")  # 头像可选：来自 ip-spec.md 或用户提供；缺省或文件不存在时不放头像
+    if av and not os.path.exists(os.path.join(BASE[0],av)): av=None
+    w=imgw(av) if av else None; dw=f' data-w="{w}"' if w else ""
+    name=html.escape(sig.get("name","<你的名字>")); main=html.escape(sig.get("main","<一句话 slogan>")); sub=html.escape(sig.get("sub","<关注引导语>"))
+    avtd=(f'<td width="74" style="width:74px;vertical-align:middle;padding:0 10px 0 0;border:0;"><span leaf=""><img src="{av}"{dw} width="64" style="display:block;width:64px;max-width:64px;height:auto;margin:0 auto;" alt=""></span></td>' if av else "")
     return (f'<section style="margin:36px 0 12px;padding:14px 12px;border:1.5px dashed #cfcfcf;border-radius:14px;background-color:#fff;box-sizing:border-box;">'
       f'<table style="width:100%;border-collapse:collapse;margin:0;"><tbody><tr>'
-      f'<td width="74" style="width:74px;vertical-align:middle;padding:0 10px 0 0;border:0;"><span leaf=""><img src="{av}"{dw} width="64" style="display:block;width:64px;max-width:64px;height:auto;margin:0 auto;" alt=""></span></td>'
+      f'{avtd}'
       f'<td style="vertical-align:middle;padding:0;border:0;">'
       f'<p style="margin:0;font-size:20px;line-height:1.4;font-weight:bold;color:#111;">{name}<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background-color:{A};margin-left:8px;vertical-align:top;margin-top:4px;"></span></p>'
       f'<p style="margin:6px 0 0;font-size:16px;line-height:1.6;font-weight:bold;color:#111;"><span style="border-bottom:3px solid {A};padding-bottom:1px;">{main}</span></p>'

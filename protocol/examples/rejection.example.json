@@ -8,7 +8,7 @@
   "issues": [
     {
       "location": "projects/2026-10-12-jev-valuation/layout/ 文末卡片",
-      "problem": "粘贴进公众号后章鱼图被放大",
+      "problem": "粘贴进公众号后头像图被放大",
       "expected": "img 写死 width 属性并缩小原图"
     }
   ]

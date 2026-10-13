@@ -15,14 +15,13 @@ if shots and "--no-sync" not in sys.argv:
     for f in sorted(glob.glob(os.path.join(shots,"*"))):
         if f.lower().endswith((".png",".jpg",".jpeg",".webp",".gif")): shutil.copy2(f,img); n+=1
     print(f"[sync] {n} 张截图 {shots} → {img}")
-# 签名头像
+# 签名头像（可选）：layout-map.json 的 signature.avatar 指向的文件需由用户提供，放在输出目录下
 here=os.path.dirname(os.path.abspath(__file__))
-shutil.copy2(os.path.join(here,"assets","octo-sign.png"),img)
 # 2 生成
 cfg=json.load(open(os.path.join(out,"layout-map.json"),encoding="utf-8"))
 build.BASE[0]=out
 frag=build.build(open(draft,encoding="utf-8").read(),cfg)
-open(os.path.join(out,"article.html"),"w",encoding="utf-8").write(build.doc(frag,"Jev估值 排版"))
+open(os.path.join(out,"article.html"),"w",encoding="utf-8").write(build.doc(frag,os.path.basename(out)+" 排版"))
 wrap=lambda f:f'<section style="max-width:420px;margin:0 auto;background-color:#fff;">{f}</section>'
 open(os.path.join(out,"wechat-paste.html"),"w",encoding="utf-8").write(
   f'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>粘贴用</title></head><body style="margin:0;background:#f2f2f2">{wrap(frag)}</body></html>')

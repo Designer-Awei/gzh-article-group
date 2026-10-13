@@ -8,7 +8,7 @@
 - 8 bots with fixed jobs: news, ideation, research, copy, visuals, layout, review, plus a chief of staff; each builds up its own experience
 - Primary sources + screenshot citations: every fact is sourced; if it can't be found, it says so instead of making it up
 - Learns your own voice: feed it your articles, diaries and comments, plus styles you like (form only, never others' viewpoints)
-- Consistent visuals: one IP character, matching cover and illustrations
+- Consistent visuals: design your own IP character at setup (or go without), with matching cover and illustrations
 - WeChat-compatible layout master: fully inline styles, end card built in code so it adapts to width
 - Reviewer gate: screenshots, copy, visuals and layout checked item by item; failures go back to the owning bot
 - One-line install for any agent: Codex, Claude Code, Cursor, Hermes, OpenClaw and more
@@ -27,14 +27,11 @@
 </tr>
 </table>
 
-The "grey octopus" mascot and an illustration:
+Illustration example:
 
-<table>
-<tr>
-<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>Grey octopus IP</sub></td>
-<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></td>
-</tr>
-</table>
+<p align="center"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></p>
+
+> Note: the grey octopus in the showcase and the Jev example project is the author's own IP, shown for demo only. **It is not included in the default configs; please don't reuse it.** After install, gzh-init helps you design your own IP, or skip it.
 
 ## One-line install
 Send this to your agent (Codex, Claude Code, Cursor, Hermes, OpenClaw, etc.):
@@ -106,7 +103,7 @@ The reviewer rejects the layout role ([rejection.schema.json](protocol/rejection
   "issues": [
     {
       "location": "projects/2026-10-12-jev-valuation/layout/ 文末卡片",
-      "problem": "粘贴进公众号后章鱼图被放大",
+      "problem": "粘贴进公众号后头像图被放大",
       "expected": "img 写死 width 属性并缩小原图"
     }
   ]

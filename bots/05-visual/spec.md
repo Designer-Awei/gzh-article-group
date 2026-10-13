@@ -10,8 +10,8 @@
 - projects/<slug>/illustration/*
 
 ## 验收标准
-- 灰章鱼 IP 一致
-- 珊瑚色 #F26B5B 是唯一强调色
+- 若设定了 IP：与 ip-spec.md 的标准参考图一致；未设定则不画吉祥物
+- 只用 visual-style.md 规定的一种强调色
 - 比例由视觉官定，公众号封面 2.35:1
 
 ## 移交对象

@@ -8,7 +8,7 @@
 - 8 个 bot 固定分工：资讯、灵感、素材、文案、视觉、排版、审核、大管家，经验各自积累
 - 一手素材 + 截图引证：每个事实都带出处，查不到就如实写，不编造
 - 学你自己的文风：投喂你的文章、日记、评论，也能喂你喜欢的别人的写法（只学形式，不抄观点）
-- 统一视觉：固定 IP 形象，封面和配图风格一致
+- 统一视觉：初始化时设计你自己的 IP 形象（也可以不用），封面和配图风格一致
 - 微信兼容排版母版：全内联样式，文末卡片用代码排，宽度自适应
 - 审核官把关：截图、文稿、配图、排版逐项验收，不合格直接打回对应 bot
 - 任意智能体一键安装：Codex、Claude Code、Cursor、Hermes、OpenClaw 等都能用
@@ -27,14 +27,11 @@
 </tr>
 </table>
 
-IP 形象「灰章鱼」与配图：
+配图示例：
 
-<table>
-<tr>
-<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>灰章鱼 IP</sub></td>
-<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
-</tr>
-</table>
+<p align="center"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></p>
+
+> 注：展示图和 Jev 示例项目里出现的灰章鱼是作者本人的 IP，仅作演示，**不包含在仓库的默认配置里，请勿复用**。安装后 gzh-init 会帮你设计自己的 IP，或选择不用 IP。
 
 ## 一键安装
 把下面这段话发给你的智能体（Codex、Claude Code、Cursor、Hermes、OpenClaw 等）：
@@ -44,7 +41,7 @@ IP 形象「灰章鱼」与配图：
 ```
 
 ## 流程
-<p align="center"><img src="docs/showcase/workflow-16-9.png" width="900" alt="工作流"></p>
+<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
 
 
 审核官不通过就用 rejection 打回负责角色，返工后重新验收；全部通过后，大管家只向用户交付两样：`layout/` 里可直接粘贴进公众号的 HTML，和 `cover/` 里的 2.35:1 封面。
@@ -106,7 +103,7 @@ gzh-article-group/
   "issues": [
     {
       "location": "projects/2026-10-12-jev-valuation/layout/ 文末卡片",
-      "problem": "粘贴进公众号后章鱼图被放大",
+      "problem": "粘贴进公众号后头像图被放大",
       "expected": "img 写死 width 属性并缩小原图"
     }
   ]
