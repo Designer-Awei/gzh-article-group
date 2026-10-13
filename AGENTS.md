@@ -1,31 +1,43 @@
 # AGENTS.md — 智能体总规范
 
-本仓库是一套公众号文章多智能体工作流。每个顶层 `NN-role/` 目录是一个角色（subagent），装载其 `SKILL.md` 即可工作。
+本仓库是一套公众号文章多智能体工作流。`bots/NN-role/` 是角色定义（subagent），装载其 `SKILL.md` 即可工作；文章产出全部在 `projects/<slug>/`。
+
+## 首次使用：初始化
+仓库刚安装、`reference/writing-style.md` 不存在时，先由 00-chief-of-staff 执行 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)，清单见 [docs/INIT.md](docs/INIT.md)：
+1. 向用户要原始语料（博客、日记、长评论、链接）→ `reference/corpus/` → 按 [reference/README.md](reference/README.md) 生成 `reference/writing-style.md`。可跳过，跳过则默认用卡兹克的 [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)。
+2. 05-visual 询问账号定位，建议匹配的 IP 形象 → `bots/05-visual/config/ip/ip-spec.md`。可跳过，跳过则中性默认、不用 IP。
 
 ## 目录约定
-- `NN-role/SKILL.md`：角色技能，装载入口。
-- `NN-role/spec.md`：输入、输出、验收标准、移交对象。
-- `NN-role/agent-card.json`：A2A Agent Card。
-- `NN-role/config/`：角色参考配置（只读，除非用户要求修改）。
-- `NN-role/projects/<slug>/`：该角色对某篇文章的产出 + `handoff.json`。
-- `protocol/`：A2A 消息 schema 与示例；`templates/project/`：项目脚手架；`scripts/new-project.py`：开新项目。
+| 路径 | 内容 |
+|---|---|
+| `bots/NN-role/` | SKILL.md、spec.md、agent-card.json、config/（只放定义，不放产出） |
+| `projects/<slug>/` | 一篇文章；固定子目录见 [projects/README.md](projects/README.md) |
+| `projects/_template/` | 新项目脚手架，`scripts/new-project.py` 使用 |
+| `reference/` | 作者语料 `corpus/` 与生成的 `writing-style.md` |
+| `protocol/` | A2A 消息 schema 与示例 |
+| `scripts/` | 工具脚本 |
+| `docs/` | INIT.md 与 showcase/ 展示图 |
 
 ## 流转顺序
-`01-news` / `02-ideation` → 用户拍板 → `00-chief-of-staff` 派 task-card → `03-research` → `04-copywriter` → `05-visual` → `06-layout` → `07-reviewer` →（通过）`00-chief-of-staff` 交付 HTML + 封面 /（不通过）rejection 打回负责角色，返工后重新验收。
+01-news / 02-ideation → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派 task-card → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
 
-## 写权限
+## 谁能写哪里
 | 角色 | 可写 |
 |---|---|
-| 每个角色 | 只写自己的 `NN-role/projects/<slug>/` |
-| 00-chief-of-staff | 另可运行 `scripts/new-project.py` |
-| 07-reviewer | 只写验收报告和 rejection，不改别人的产出 |
-| 任何角色 | 不改 `config/`、`protocol/`，除非用户明确要求 |
+| 00-chief-of-staff | `projects/<slug>/README.md`、`handoff.json`；运行 new-project.py；初始化时写 `reference/` |
+| 01-news | `news/`（本地，不入库） |
+| 02-ideation | `projects/<slug>/brief/` |
+| 03-research | `projects/<slug>/source/` |
+| 04-copywriter | `projects/<slug>/draft/`；按用户反馈更新 `reference/writing-style.md` |
+| 05-visual | `projects/<slug>/illustration/`、`cover/`；`bots/05-visual/config/ip/` |
+| 06-layout | `projects/<slug>/layout/` |
+| 07-reviewer | `projects/<slug>/review/`；只验收与打回，不改别人的产出 |
+| 所有角色 | 追加 `handoff.json` 的 `log`；不改 `protocol/` 与他人 `config/`，除非用户要求 |
 
-## 分工归属
-截图 → 03-research；文字 → 04-copywriter；配图 → 05-visual；排版 → 06-layout。
+分工归属：截图 → 03-research；文字 → 04-copywriter；配图与封面 → 05-visual；排版 → 06-layout。
 
 ## 公开内容红线
-发布给读者的内容（排版 HTML、正文、封面）禁止出现：截图文件名、`shots/` 等内部路径、「初稿」「待补」「待查」「以截图为准」等内部标记、引用清单里的「来源」「截图」列、句首圆点。需要用户判断的问题由 00-chief-of-staff 汇总成一条编号消息，不留在稿件里。
+发布给读者的内容（排版 HTML、正文、封面）禁止出现：截图文件名、`source/shots/` 等内部路径、「初稿」「待补」「待查」「以截图为准」等内部标记、引用清单里的「来源」「截图」列、句首圆点、私密信息。需要用户判断的问题由 00-chief-of-staff 汇总成一条编号消息，不留在稿件里。
 
 ## 不做
 不对外发布、不替用户发消息、不编造事实、链接、引语或截图。

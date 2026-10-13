@@ -2,5 +2,9 @@ __pycache__/
 *.pyc
 .DS_Store
 *.tar.gz
-**/projects/*/preview-standalone.html
 .env
+news/
+projects/*/layout/preview-standalone.html
+reference/corpus/**
+!reference/corpus/*/
+!reference/corpus/*/.gitkeep

@@ -1,0 +1,128 @@
+{
+  "project": "2026-10-12-jev-valuation",
+  "status": "delivered_to_user",
+  "log": [
+    {
+      "id": "tc-001",
+      "type": "task-card",
+      "from": "00-chief-of-staff",
+      "to": "03-research",
+      "status": "in_progress",
+      "artifacts": [
+        "brief/topic.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-001",
+      "type": "delivery",
+      "from": "03-research",
+      "to": "04-copywriter",
+      "status": "delivered",
+      "artifacts": [
+        "source/materials.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-002",
+      "type": "delivery",
+      "from": "04-copywriter",
+      "to": "05-visual",
+      "status": "delivered",
+      "artifacts": [
+        "draft/draft.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-003",
+      "type": "delivery",
+      "from": "05-visual",
+      "to": "06-layout",
+      "status": "delivered",
+      "artifacts": [
+        "illustration/fig-jevons-paradox.jpg"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-004",
+      "type": "delivery",
+      "from": "06-layout",
+      "to": "07-reviewer",
+      "status": "delivered",
+      "artifacts": [
+        "layout/README.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "rj-001",
+      "type": "rejection",
+      "from": "07-reviewer",
+      "to": "05-visual",
+      "status": "rejected",
+      "artifacts": [
+        "cover/"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-005",
+      "type": "delivery",
+      "from": "05-visual",
+      "to": "07-reviewer",
+      "status": "delivered",
+      "artifacts": [
+        "cover/cover-2.35.jpg"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "rj-002",
+      "type": "rejection",
+      "from": "07-reviewer",
+      "to": "06-layout",
+      "status": "rejected",
+      "artifacts": [
+        "layout/"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-006",
+      "type": "delivery",
+      "from": "06-layout",
+      "to": "07-reviewer",
+      "status": "delivered",
+      "artifacts": [
+        "layout/README.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-007",
+      "type": "delivery",
+      "from": "07-reviewer",
+      "to": "00-chief-of-staff",
+      "status": "accepted",
+      "artifacts": [
+        "review/review-report.md"
+      ],
+      "at": "2026-10-13"
+    },
+    {
+      "id": "dl-008",
+      "type": "delivery",
+      "from": "00-chief-of-staff",
+      "to": "user",
+      "status": "delivered_to_user",
+      "artifacts": [
+        "layout/preview-standalone.html",
+        "cover/cover-2.35.jpg"
+      ],
+      "at": "2026-10-13"
+    }
+  ]
+}

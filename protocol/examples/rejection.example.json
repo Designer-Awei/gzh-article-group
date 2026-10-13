@@ -1,13 +1,13 @@
 {
   "type": "rejection",
-  "id": "rj-001",
+  "id": "rj-002",
   "project": "2026-10-12-jev-valuation",
   "from": "07-reviewer",
   "to": "06-layout",
   "item": "layout",
   "issues": [
     {
-      "location": "文末卡片",
+      "location": "projects/2026-10-12-jev-valuation/layout/ 文末卡片",
       "problem": "粘贴进公众号后章鱼图被放大",
       "expected": "img 写死 width 属性并缩小原图"
     }

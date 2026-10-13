@@ -18,7 +18,8 @@
       "const": "task-card"
     },
     "id": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^tc-\\d{3}$"
     },
     "project": {
       "type": "string",
@@ -58,6 +59,9 @@
       "items": {
         "type": "string"
       }
+    },
+    "output_dir": {
+      "type": "string"
     },
     "acceptance": {
       "type": "array",

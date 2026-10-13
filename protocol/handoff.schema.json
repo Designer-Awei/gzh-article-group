@@ -1,43 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protocol/handoff.schema.json",
   "title": "handoff",
   "type": "object",
   "required": [
     "project",
-    "from",
-    "to",
     "status",
-    "artifacts"
+    "log"
   ],
   "properties": {
     "project": {
       "type": "string"
-    },
-    "from": {
-      "enum": [
-        "00-chief-of-staff",
-        "01-news",
-        "02-ideation",
-        "03-research",
-        "04-copywriter",
-        "05-visual",
-        "06-layout",
-        "07-reviewer",
-        "user"
-      ]
-    },
-    "to": {
-      "enum": [
-        "00-chief-of-staff",
-        "01-news",
-        "02-ideation",
-        "03-research",
-        "04-copywriter",
-        "05-visual",
-        "06-layout",
-        "07-reviewer",
-        "user"
-      ]
     },
     "status": {
       "enum": [
@@ -50,14 +23,78 @@
         "skipped"
       ]
     },
-    "artifacts": {
+    "log": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "from",
+          "to",
+          "status",
+          "artifacts"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "task-card",
+              "delivery",
+              "rejection"
+            ]
+          },
+          "from": {
+            "enum": [
+              "00-chief-of-staff",
+              "01-news",
+              "02-ideation",
+              "03-research",
+              "04-copywriter",
+              "05-visual",
+              "06-layout",
+              "07-reviewer",
+              "user"
+            ]
+          },
+          "to": {
+            "enum": [
+              "00-chief-of-staff",
+              "01-news",
+              "02-ideation",
+              "03-research",
+              "04-copywriter",
+              "05-visual",
+              "06-layout",
+              "07-reviewer",
+              "user"
+            ]
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "in_progress",
+              "delivered",
+              "accepted",
+              "rejected",
+              "delivered_to_user",
+              "skipped"
+            ]
+          },
+          "artifacts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "相对 projects/<slug>/ 的路径"
+          },
+          "at": {
+            "type": "string"
+          }
+        }
       }
-    },
-    "updated": {
-      "type": "string"
     }
   }
 }
