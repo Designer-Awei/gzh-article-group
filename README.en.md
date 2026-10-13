@@ -39,6 +39,8 @@ IP character and illustration example:
 > Note: the grey octopus in the showcase and the Jev example project is the author's own IP, shown for demo only. **It is not included in the default configs; please don't reuse it.** After install, gzh-init helps you design your own IP, or skip it.
 
 ## One-line install
+**Prerequisite**: your agent needs built-in image generation, or you configure an image API yourself (env vars `IMAGE_API_KEY` / `IMAGE_API_BASE` / `IMAGE_MODEL`; options in [image-gen.md](bots/05-visual/config/image-gen.md)). Without it the visual role cannot produce covers or figures.
+
 Send this to your agent (Codex, Claude Code, Cursor, Hermes, OpenClaw, etc.):
 
 ```text
@@ -128,6 +130,8 @@ The full output of the Jev article ("Jev at a $7.5B valuation: a reskinned class
 ## Acknowledgements
 
 This workflow was inspired by the "bot army" post shared on X by [@Jackywxsz](https://x.com/Jackywxsz): https://x.com/Jackywxsz/status/2108808842045956343
+
+The hand-drawn illustration style draws on [Jacky-illustration](https://github.com/Jackywxsz/Jacky-illustration) and [visual-ip-illustrations](https://github.com/yangchuansheng/visual-ip-illustrations); thanks to both authors for sharing them.
 
 ## License
 [MIT](LICENSE)

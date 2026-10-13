@@ -17,5 +17,9 @@
 - 默认由视觉官按内容和用途自行选择比例：16:9、4:3、1:1 或竖版（3:4、9:16）
 - 只有用于微信公众号文章封面时，才用 2.35:1：先生成 16:9，主体放在竖向中间带，再裁成 2.35:1（如 1024x436）
 
+## 风格参考
+- 默认手绘画风的灵感来自 [Jacky-illustration](https://github.com/Jackywxsz/Jacky-illustration) 与 [visual-ip-illustrations](https://github.com/yangchuansheng/visual-ip-illustrations)（只借鉴画法，不用其中角色）。
+- 生图流程见 [image-gen.md](image-gen.md)。
+
 ## 版权
 - 只使用用户自己的原创 IP，不使用他人 IP 或受版权保护的角色

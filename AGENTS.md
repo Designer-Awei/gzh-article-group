@@ -8,8 +8,9 @@
 用户让你「安装这个仓库」时：
 1. 把仓库 clone 到用户指定位置；没指定就放到当前工作目录。
 2. 判断你所在的环境，按下表选择安装方式。表中路径是**常见位置，未经本仓库实测**；动手前先查你自己平台的文档或已有目录确认，确认不了就用最后一行的兜底方式。
-3. 告诉用户你选了哪种方式、放到了哪里。
-4. 运行初始化 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)（gzh-init）。
+3. 检测生图能力：你是否自带生图工具，或环境变量 `IMAGE_API_KEY` / `IMAGE_API_BASE` / `IMAGE_MODEL` 是否已配置。都没有就提醒用户配置（见 [bots/05-visual/config/image-gen.md](bots/05-visual/config/image-gen.md)）；视觉官在没有生图能力时必须停下，不得伪造图片。
+4. 告诉用户你选了哪种方式、放到了哪里，以及生图能力的检测结果。
+5. 运行初始化 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)（gzh-init）。
 
 | 你的环境 | 判断依据 | 推荐安装方式（常见路径，需自行核实） |
 |---|---|---|

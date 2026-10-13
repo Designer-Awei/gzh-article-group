@@ -39,6 +39,8 @@ IP 形象与配图示例：
 > 注：展示图和 Jev 示例项目里出现的灰章鱼是作者本人的 IP，仅作演示，**不包含在仓库的默认配置里，请勿复用**。安装后 gzh-init 会帮你设计自己的 IP，或选择不用 IP。
 
 ## 一键安装
+**前提**：你的智能体需要自带生图能力，或者你自己配置一个生图 API（环境变量 `IMAGE_API_KEY` / `IMAGE_API_BASE` / `IMAGE_MODEL`，可选服务见 [image-gen.md](bots/05-visual/config/image-gen.md)），否则视觉官无法出封面和配图。
+
 把下面这段话发给你的智能体（Codex、Claude Code、Cursor、Hermes、OpenClaw 等）：
 
 ```text
@@ -128,6 +130,8 @@ gzh-article-group/
 ## 致谢
 
 本工作流的灵感来自 [@Jackywxsz](https://x.com/Jackywxsz) 在 X 上分享的「bot 军团」帖子：https://x.com/Jackywxsz/status/2108808842045956343
+
+配图的手绘画风参考了 [Jacky-illustration](https://github.com/Jackywxsz/Jacky-illustration) 和 [visual-ip-illustrations](https://github.com/yangchuansheng/visual-ip-illustrations)，感谢两位作者的开源分享。
 
 ## 许可
 [MIT](LICENSE)

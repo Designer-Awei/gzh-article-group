@@ -3,6 +3,9 @@
 由 00-chief-of-staff 执行（见 bots/00-chief-of-staff/init/SKILL.md）。每一步都可以跳过，跳过时使用中性默认值。
 
 ## 初始化清单
+- [ ] **第 0 步 · 生图能力**
+  - 检查平台是否自带生图，或 `IMAGE_API_KEY` / `IMAGE_API_BASE` / `IMAGE_MODEL` 是否已配置。
+  - 都没有 → 提示用户开启或配置（可选服务见 [bots/05-visual/config/image-gen.md](../bots/05-visual/config/image-gen.md)）；可先跳过，视觉官出图前会再次检查，没有能力就停下，不伪造。
 - [ ] **第 1 步 · 写作风格**（文案官依赖）
   - 向用户索取原始语料：过往博客/公众号文章、日记、长评论、口喷转写、文章链接。
   - 文件放入 `reference/corpus/articles|notes/`，自己的帖子截图放 `reference/corpus/imgs/`，链接写入 `reference/corpus/links/links.md`。
@@ -18,4 +21,4 @@
 
 ---
 
-English summary: step 1 collect the user's own corpus (text, links, screenshots) into `reference/corpus/` plus optional liked third-party samples into `reference/prefer/` (form only) and build `reference/writing-style.md` (skip → default [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role asks about account positioning and proposes a matching IP character (skip → neutral, no mascot); step 3 news sources; step 4 confirm.
+English summary: step 0 check image-generation capability (built-in, or IMAGE_API_KEY / IMAGE_API_BASE / IMAGE_MODEL); step 1 collect the user's own corpus (text, links, screenshots) into `reference/corpus/` plus optional liked third-party samples into `reference/prefer/` (form only) and build `reference/writing-style.md` (skip → default [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role asks about account positioning and proposes a matching IP character (skip → neutral, no mascot); step 3 news sources; step 4 confirm.
