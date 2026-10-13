@@ -1,5 +1,8 @@
 # A2A 消息约定 / A2A message conventions
 
+> **可选。** 默认的单智能体模式不需要发送消息，只需按同样字段把每次交接追加到 `projects/<slug>/handoff.json` 的 `log`。多智能体模式才用 A2A 发送这些消息。参考实现使用宿主平台的智能体消息，并未部署 A2A 服务。
+> **Optional.** Single-agent mode (the default) sends no messages; just append each handoff with these fields to `handoff.json` → `log`. Use A2A only in multi-agent mode. The reference implementation used the host platform's agent messaging, not a deployed A2A service.
+
 角色之间只通过三种消息通信，作为 A2A `Message` 的 `DataPart` 载荷发送；每条消息同时追加到 `projects/<slug>/handoff.json` 的 `log`。
 Roles talk only through three message types, sent as the `DataPart` of an A2A `Message`, and each is appended to `projects/<slug>/handoff.json` → `log`.
 

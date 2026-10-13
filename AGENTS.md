@@ -1,6 +1,24 @@
 # AGENTS.md — 智能体总规范
 
-本仓库是一套公众号文章多智能体工作流。`bots/NN-role/` 是角色定义（subagent），装载其 `SKILL.md` 即可工作；文章产出全部在 `projects/<slug>/`。
+本仓库是一套公众号文章工作流。`bots/NN-role/` 是角色定义，装载其 `SKILL.md` 即可工作；文章产出全部在 `projects/<slug>/`。
+
+**默认单智能体运行**：你（读到这份文件的智能体）一个人按流程依次扮演各角色，交接靠 `projects/<slug>/` 里的文件，每次交接在 `handoff.json` 的 `log` 追加一条。多智能体 + A2A 是可选项，见文末。
+
+## 自安装指南（给智能体）
+用户让你「安装这个仓库」时：
+1. 把仓库 clone 到用户指定位置；没指定就放到当前工作目录。
+2. 判断你所在的环境，按下表选择安装方式。表中路径是**常见位置，未经本仓库实测**；动手前先查你自己平台的文档或已有目录确认，确认不了就用最后一行的兜底方式。
+3. 告诉用户你选了哪种方式、放到了哪里。
+4. 运行初始化 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)（gzh-init）。
+
+| 你的环境 | 判断依据 | 推荐安装方式（常见路径，需自行核实） |
+|---|---|---|
+| 支持 Agent Skills 的工具（如 Claude Code、Codex、Hermes、OpenClaw） | 存在用户级或项目级 skills 目录，SKILL.md 带 name/description frontmatter 会被识别 | 把每个 `bots/NN-role/` 复制或软链到 skills 目录，命名 `gzh-<role>`；把 `bots/00-chief-of-staff/init/` 装成 `gzh-init`。skill 内的相对路径以仓库根为准，所以运行时工作目录保持在仓库里 |
+| 读取项目级 AGENTS.md 的工具（如 Codex 等） | 在仓库根目录工作时会自动加载 AGENTS.md | 不必复制，直接在仓库根目录工作；需要某角色时读对应 `bots/NN-role/SKILL.md` |
+| 基于规则文件的编辑器（如 Cursor） | 存在 `.cursor/rules/` 等规则目录 | 在规则目录新建一条规则引用 `AGENTS.md`；角色按需用 `@bots/NN-role/SKILL.md` 引入 |
+| 平台自带多 bot / 子智能体（想跑多智能体模式） | 能创建多个独立智能体并互发消息 | 每个角色一个智能体，系统提示用对应 SKILL.md + spec.md；消息按 `protocol/` 约定 |
+| **兜底：没有 skills 系统** | 以上都不确定 | 不安装。始终以本文件为总规范，需要某个角色时直接读取 `bots/*/SKILL.md` 和 `spec.md` |
+
 
 ## 首次使用：初始化
 仓库刚安装、`reference/writing-style.md` 不存在时，先由 00-chief-of-staff 执行 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)，清单见 [docs/INIT.md](docs/INIT.md)：
@@ -19,7 +37,7 @@
 | `docs/` | INIT.md 与 showcase/ 展示图 |
 
 ## 流转顺序
-01-news / 02-ideation → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派 task-card → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
+01-news / 02-ideation → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派任务（单智能体时即切换到该角色；多智能体时发 task-card） → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
 
 ## 谁能写哪里
 | 角色 | 可写 |
@@ -44,3 +62,6 @@
 
 ## 不做
 不对外发布、不替用户发消息、不编造事实、链接、引语或截图。
+
+## 可选：多智能体 + A2A
+想把角色拆成多个独立智能体时：每个角色用 `bots/NN-role/agent-card.json` 注册，消息使用 [protocol/](protocol/README.md) 的 task-card / delivery / rejection，且仍然写 `handoff.json`。说明：参考实现用的是宿主平台自带的智能体消息，并非部署好的 A2A 服务；这里的 agent card 与 schema 是按 A2A 规范整理的约定。

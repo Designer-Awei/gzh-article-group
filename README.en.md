@@ -2,31 +2,28 @@
 
 [中文](README.md) | English
 
-A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a subagent loaded with a fixed skill/spec, and roles talk over the A2A (Agent2Agent) protocol with three messages: task card, delivery, rejection. Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's writing style lives in `reference/`: `corpus/` is the author's own material (source of voice and viewpoints, highest weight) and `prefer/` holds liked third-party samples (form only: structure, rhythm, hooks; never their viewpoints or text). Send any bot a link or screenshot and it files it and triggers a style refresh.
+A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a fixed skill/spec. **The default is single-agent mode**: one agent mounts the roles' `SKILL.md` files, switches role on demand, and hands off through files in `projects/<slug>/` (logged in `handoff.json`). If you want separate agents per role, A2A (Agent2Agent) is **optional**: each role ships an `agent-card.json`, and `protocol/` defines the messages (task card, delivery, rejection). Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's writing style lives in `reference/`: `corpus/` is the author's own material (source of voice and viewpoints, highest weight) and `prefer/` holds liked third-party samples (form only: structure, rhythm, hooks; never their viewpoints or text). Send any bot a link or screenshot and it files it and triggers a style refresh.
+
+## One-line install
+Send this to your agent (Codex, Claude Code, Cursor, Hermes, OpenClaw, etc.):
+
+```text
+Install https://github.com/Designer-Awei/gzh-article-group. Read AGENTS.md in the repo, detect your current environment and pick the best install method. Then run the initialization (gzh-init): ask me for writing samples to build my writing style, then ask about my account positioning and suggest an IP character. I may skip any step; use the defaults if I do.
+```
 
 ## Flow
 <p align="center"><img src="docs/showcase/workflow.en.png" width="900" alt="Workflow"></p>
 
-<details>
-<summary>Mermaid text version</summary>
-
-```mermaid
-flowchart LR
-  N[01 News] --> I[02 Ideation]
-  I --> U{User picks}
-  U --> C[00 Chief of Staff]
-  C -->|task-card| R[03 Research] --> W[04 Copywriter] --> V[05 Visual] --> L[06 Layout] --> Q[07 Reviewer]
-  Q -->|rejection| R
-  Q -->|rejection| W
-  Q -->|rejection| V
-  Q -->|rejection| L
-  Q -->|accepted| C
-  C -->|HTML + cover| User((User))
-```
-
-</details>
 
 If the reviewer rejects, it sends a rejection to the owning role, which reworks and is reviewed again. Once everything passes, the chief of staff delivers exactly two things: the WeChat-ready HTML in `layout/` and the 2.35:1 cover in `cover/`.
+
+## Run modes
+| Mode | For | How |
+|---|---|---|
+| **Single agent (default, recommended)** | Most people | One agent mounts `bots/*/SKILL.md` and plays each role in turn; handoffs are files in `projects/<slug>/`, logged in `handoff.json` |
+| Multi-agent + A2A (optional) | Running roles independently, in parallel or across platforms | One agent per role, registered via `agent-card.json`, messaging per `protocol/`, still writing `handoff.json` |
+
+Note: the reference implementation ran as several bots on a host platform, coordinating through that platform's built-in agent messaging, not a deployed A2A service. `agent-card.json` and `protocol/` are conventions shaped after the A2A spec for anyone who wants to wire it up.
 
 ## Layout
 ```
@@ -64,7 +61,7 @@ Agents should read [AGENTS.md](AGENTS.md), [CONVENTIONS.md](CONVENTIONS.md) and 
 | [06-layout](bots/06-layout/SKILL.md) | Layout Designer | Lays out WeChat-ready HTML from draft, figures and screenshots |
 | [07-reviewer](bots/07-reviewer/SKILL.md) | Reviewer | Final QA gate; rejects back to the owning role |
 
-## A2A message example
+## A2A message example (optional)
 The reviewer rejects the layout role ([rejection.schema.json](protocol/rejection.schema.json)):
 ```json
 {
@@ -88,11 +85,7 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 ## Quick start
 1. **Initialize**: have an agent run [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md); checklist in [docs/INIT.md](docs/INIT.md). Step 1 uploads your own corpus (plus optional liked samples) to build `reference/writing-style.md` (skippable, defaults to [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role proposes an IP character matching your account positioning (skippable).
 2. **Start an article**: `python3 scripts/new-project.py 2026-10-20-my-topic` creates the fixed layout and `handoff.json` from `projects/_template/`.
-3. **Load a role** (copywriter as example):
-- **Codex**: run at the repo root; Codex reads `AGENTS.md` automatically. Prompt "act as the copywriter per `bots/04-copywriter/SKILL.md` for `projects/<slug>`". Or copy `bots/04-copywriter/` to `~/.codex/skills/gzh-copywriter/` to load it as a skill.
-- **Cursor**: open the repo and add `.cursor/rules/copywriter.mdc` referencing `@bots/04-copywriter/SKILL.md` and `@AGENTS.md`; or just `@bots/04-copywriter/SKILL.md` in Chat.
-- **Hermes**: copy `bots/04-copywriter/` into Hermes' skills directory (e.g. `~/.hermes/skills/gzh-copywriter/`); the SKILL.md frontmatter supplies name and description.
-- **OpenClaw**: put `bots/04-copywriter/` into OpenClaw's skills directory (e.g. `~/.openclaw/skills/gzh-copywriter/`), restart the session, and invoke `gzh-copywriter`.
+3. **Load roles**: follow the self-install guide in [AGENTS.md](AGENTS.md) (skills directory, rules file, or no install at all: read `bots/*/SKILL.md` in place). Check each tool's own docs for exact paths.
 
 ## Showcase
 <table>
@@ -126,7 +119,7 @@ Project: [projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/R
 5. [cover/cover-2.35.jpg](projects/2026-10-12-jev-valuation/cover/cover-2.35.jpg) · `05-visual` · 2.35:1 cover
 6. [layout/README.md](projects/2026-10-12-jev-valuation/layout/README.md) · `06-layout` · Layout snippets
 7. [review/review-report.md](projects/2026-10-12-jev-valuation/review/review-report.md) · `07-reviewer` · Review report with rejections
-8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · A2A handoff log (incl. 2 rejections)
+8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · handoff log (incl. 2 rejections)
 
 ## Acknowledgements
 

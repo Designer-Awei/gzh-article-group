@@ -15,3 +15,5 @@
 - 每个角色目录固定包含：`SKILL.md`（frontmatter: name, description）、`agent-card.json`、`spec.md`、`config/`。
 - 中文标点用全角；英文原文引语、金额、链接保持半角。
 - 公开内容不写句首圆点列表。
+
+- 交接：默认单智能体模式下通过文件交接，`handoff.json` 的 `log` 条目字段与 protocol/ 的消息一致；A2A 仅在多智能体模式下使用（可选）。
