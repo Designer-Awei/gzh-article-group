@@ -1,0 +1,22 @@
+Use case: infographic-diagram
+Asset type: Chinese GitHub README workflow diagram.
+Generate a polished landscape EXACT 16:9 image, 1920x1080 or 2048x1152. White/light warm gray background, dark navy typography, restrained coral accents and green approval. Flat editorial design, consistent rounded cards, ample whitespace, crisp Chinese sans serif text, simple small line icons. No 3D, no excessive decoration.
+Title exactly: "公众号文章工作流"
+Subtitle exactly: "从一句选题，到可直接发布的成品"
+Top row left to right four cards with arrows: "01 资讯官" / "工作日 11:00 早报"; "02 灵感官" / "讨论并收敛选题"; "用户" / "拍板选题"; "00 大管家" / "开项目 · 派任务". First arrow label "自动推送".
+Second row left to right five cards: "03 素材官" / "事实 · 链接 · 截图"; "04 文案官" / "按作者风格写稿"; "05 视觉官" / "配图 · 封面"; "06 排版官" / "公众号 HTML"; "07 审核官" / "逐项验收". Main arrows connect in that exact order. Connect top row chief card to second row researcher using a discreet routed line through the whitespace between rows without crossing any cards.
+Bottom left small auxiliary card "你的文风" / "本人语料 + 偏好样本", thin arrow to 文案官.
+Bottom right green delivery card "大管家交付用户" / "排版 HTML + 2.35:1 封面", green arrow from reviewer labeled "通过".
+A coral dashed return path from reviewer back to a bracket spanning the four production cards (03 to 06), clearly labeled "不通过：打回负责角色，返工后复审"; no ambiguous forward direction, no line crossing text.
+Small bottom footer exactly "默认：一个智能体依次扮演各角色；多智能体协作可选"
+Keep all specified text accurate and readable at README display width 900px. Hierarchy: large title, bold role headings, smaller supporting descriptions. Geometrically precise spacious layout. Only specified text. No watermark.
+
+Revision via built-in imagegen:
+Edit the referenced workflow diagram. Remove exactly the two top heading lines "公众号文章工作流" and "从一句选题，到可直接发布的成品", and remove the bottom footer "默认：一个智能体依次扮演各角色；多智能体协作可选". No title, subtitle, or footer in the resulting image. Rebalance the remaining workflow to fill the landscape 16:9 canvas with comfortable margins, avoiding a large blank area at the top. Preserve every other Chinese label verbatim, all cards and icons, all arrow directions, the reviewer coral dashed return arrows to 03–06, the gray personal writing style input arrow to 04, and green approval arrow to delivery. Preserve white background, navy text, pale blue and peach cards, coral accents, green delivery card and existing flat visual style. Do not add any new text. Output a clean polished landscape 16:9 workflow image.
+Final correction: Edit this image with ONE change only: restore the coral red caption "不通过：打回负责角色，返工后复审" centered immediately below the dashed coral return path, in the wide white space between that return line and the bottom two cards. This caption is necessary to explain the return arrows. Preserve ALL other text, cards, icons, connectors, colors and layout exactly. Keep no title or subtitle at top and no default-mode footer at bottom. Keep landscape 16:9.
+
+Dark border and spacing revision via built-in imagegen:
+Edit this existing Chinese workflow image. Make only these two design changes:
+1. Add a crisp continuous dark navy outline to EVERY rounded rectangular card, all eleven cards including the four top cards, five middle cards, bottom-left "你的文风" card and bottom-right green delivery card. Uniform approximately 3px stroke at this resolution; rounded corners follow the existing shape; keep the pale card fills. The outlines must clearly separate the cards from the white background.
+2. Reduce the excessive top empty space: first row cards should begin about 45–55px from the top instead of 150px. Rebalance the rows vertically over the landscape 16:9 canvas, with similarly modest top and bottom margins, retaining ample connector spacing.
+Preserve all existing Chinese text verbatim, every icon, the navy/coral/green palette, arrow directions and workflow semantics. Preserve the full coral dashed return route from reviewer to all four 03–06 roles AND its caption "不通过：打回负责角色，返工后复审". Preserve "自动推送", "通过", gray writing-style input to 04, green delivery arrow. Keep all card headings and subtitles exactly as reference, with clean readable typography. No title, subtitle, footer, new labels, watermark, or extra decoration. Output landscape 16:9 polished diagram.
