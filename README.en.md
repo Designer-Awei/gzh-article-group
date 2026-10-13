@@ -2,7 +2,39 @@
 
 [中文](README.md) | English
 
-A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a fixed skill/spec. **The default is single-agent mode**: one agent mounts the roles' `SKILL.md` files, switches role on demand, and hands off through files in `projects/<slug>/` (logged in `handoff.json`). If you want separate agents per role, A2A (Agent2Agent) is **optional**: each role ships an `agent-card.json`, and `protocol/` defines the messages (task card, delivery, rejection). Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's writing style lives in `reference/`: `corpus/` is the author's own material (source of voice and viewpoints, highest weight) and `prefer/` holds liked third-party samples (form only: structure, rhythm, hooks; never their viewpoints or text). Send any bot a link or screenshot and it files it and triggers a style refresh.
+**Give it a topic, get back a WeChat article ready to paste.**
+
+- Topic to finished piece: one topic in, laid-out HTML plus a cover out
+- 8 bots with fixed jobs: news, ideation, research, copy, visuals, layout, review, plus a chief of staff; each builds up its own experience
+- Primary sources + screenshot citations: every fact is sourced; if it can't be found, it says so instead of making it up
+- Learns your own voice: feed it your articles, diaries and comments, plus styles you like (form only, never others' viewpoints)
+- Consistent visuals: one IP character, matching cover and illustrations
+- WeChat-compatible layout master: fully inline styles, end card built in code so it adapts to width
+- Reviewer gate: screenshots, copy, visuals and layout checked item by item; failures go back to the owning bot
+- One-line install for any agent: Codex, Claude Code, Cursor, Hermes, OpenClaw and more
+
+## Showcase
+<table>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>Pull quote and highlighted sentence</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>Compare cards</sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>Screenshot citations</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>Comparison table</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>References and coded end card</sub></td>
+</tr>
+</table>
+
+The "grey octopus" mascot and an illustration:
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>Grey octopus IP</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></td>
+</tr>
+</table>
 
 ## One-line install
 Send this to your agent (Codex, Claude Code, Cursor, Hermes, OpenClaw, etc.):
@@ -87,39 +119,9 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 2. **Start an article**: `python3 scripts/new-project.py 2026-10-20-my-topic` creates the fixed layout and `handoff.json` from `projects/_template/`.
 3. **Load roles**: follow the self-install guide in [AGENTS.md](AGENTS.md) (skills directory, rules file, or no install at all: read `bots/*/SKILL.md` in place). Check each tool's own docs for exact paths.
 
-## Showcase
-<table>
-<tr>
-<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>Pull quote and highlighted sentence</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>Compare cards</sub></td>
-</tr>
-<tr>
-<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>Screenshot citations</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>Comparison table</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>References and coded end card</sub></td>
-</tr>
-</table>
+## End-to-end example
 
-The "grey octopus" mascot and an illustration:
-
-<table>
-<tr>
-<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>Grey octopus IP</sub></td>
-<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></td>
-</tr>
-</table>
-
-## End-to-end example: Jev at a $7.5B valuation — a reskinned classifier or real innovation?
-Project: [projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/README.md)
-1. [brief/topic.md](projects/2026-10-12-jev-valuation/brief/topic.md) · `02-ideation` · Topic brief: stance "a small innovation"
-2. [source/materials.md](projects/2026-10-12-jev-valuation/source/materials.md) · `03-research` · Research pack (M-numbered, linked)
-3. [draft/draft.md](projects/2026-10-12-jev-valuation/draft/draft.md) · `04-copywriter` · Draft excerpt
-4. [illustration/fig-jevons-paradox.jpg](projects/2026-10-12-jev-valuation/illustration/fig-jevons-paradox.jpg) · `05-visual` · Figure
-5. [cover/cover-2.35.jpg](projects/2026-10-12-jev-valuation/cover/cover-2.35.jpg) · `05-visual` · 2.35:1 cover
-6. [layout/README.md](projects/2026-10-12-jev-valuation/layout/README.md) · `06-layout` · Layout snippets
-7. [review/review-report.md](projects/2026-10-12-jev-valuation/review/review-report.md) · `07-reviewer` · Review report with rejections
-8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · handoff log (incl. 2 rejections)
+The full output of the Jev article ("Jev at a $7.5B valuation: a reskinned classifier or real innovation?"), from topic, sources, draft, figures and cover to layout, review and handoff log, is in [projects/2026-10-12-jev-valuation/](projects/2026-10-12-jev-valuation/).
 
 ## Acknowledgements
 

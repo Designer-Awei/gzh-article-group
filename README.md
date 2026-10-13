@@ -2,7 +2,39 @@
 
 中文 | [English](README.en.md)
 
-一套**公众号文章多智能体工作流**，给 Codex、Cursor、Hermes、OpenClaw 等智能体直接装载使用。`bots/` 里每个角色是一份固定的 skill/spec。**默认用法是单智能体**：一个智能体挂载各角色的 `SKILL.md`，按需切换角色，通过 `projects/<slug>/` 里的文件交接（`handoff.json` 记录流转）。想拆成多个独立智能体的，可以**选用** A2A（Agent2Agent）协议：每个角色有 `agent-card.json`，消息格式见 `protocol/`（任务卡、交付、打回）。一篇文章一个 `projects/<slug>/` 文件夹，结构固定；作者的写作风格沉淀在 `reference/`：`corpus/` 是本人语料（观点和声音的来源，权重最高），`prefer/` 是喜欢的第三方风格样本（只借鉴结构、节奏、钩子，不抄观点）。随时把链接或截图丢给任意 bot，它会归档并触发风格刷新。
+**说一句选题，拿到一篇能直接粘进公众号的成品。**
+
+- 从选题到成品：一句选题进去，出来排好版的 HTML 和一张封面
+- 8 个 bot 固定分工：资讯、灵感、素材、文案、视觉、排版、审核、大管家，经验各自积累
+- 一手素材 + 截图引证：每个事实都带出处，查不到就如实写，不编造
+- 学你自己的文风：投喂你的文章、日记、评论，也能喂你喜欢的别人的写法（只学形式，不抄观点）
+- 统一视觉：固定 IP 形象，封面和配图风格一致
+- 微信兼容排版母版：全内联样式，文末卡片用代码排，宽度自适应
+- 审核官把关：截图、文稿、配图、排版逐项验收，不合格直接打回对应 bot
+- 任意智能体一键安装：Codex、Claude Code、Cursor、Hermes、OpenClaw 等都能用
+
+## 展示
+<table>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>金句卡与重点句高亮</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>对比卡</sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>截图引用与来源标注</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>对比表</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>引用清单与代码排版文末卡片</sub></td>
+</tr>
+</table>
+
+IP 形象「灰章鱼」与配图：
+
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>灰章鱼 IP</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
+</tr>
+</table>
 
 ## 一键安装
 把下面这段话发给你的智能体（Codex、Claude Code、Cursor、Hermes、OpenClaw 等）：
@@ -87,39 +119,9 @@ gzh-article-group/
 2. **开新文章**：`python3 scripts/new-project.py 2026-10-20-my-topic`，从 `projects/_template/` 生成固定结构和 `handoff.json`。
 3. **装载角色**：按 [AGENTS.md](AGENTS.md) 的「自安装指南」选择方式（skills 目录、规则文件，或不安装、直接在仓库里读 `bots/*/SKILL.md`）。各工具的路径以其官方文档为准。
 
-## 展示
-<table>
-<tr>
-<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>金句卡与重点句高亮</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>对比卡</sub></td>
-</tr>
-<tr>
-<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>截图引用与来源标注</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>对比表</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>引用清单与代码排版文末卡片</sub></td>
-</tr>
-</table>
+## 全链路示例
 
-IP 形象「灰章鱼」与配图：
-
-<table>
-<tr>
-<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>灰章鱼 IP</sub></td>
-<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
-</tr>
-</table>
-
-## 全链路示例：Jev 估值 75 亿美元，是分类器换皮还是真创新？
-项目：[projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/README.md)
-1. [brief/topic.md](projects/2026-10-12-jev-valuation/brief/topic.md) · `02-ideation` · 选题总结：核心观点「小创新」
-2. [source/materials.md](projects/2026-10-12-jev-valuation/source/materials.md) · `03-research` · 素材包（M1… 编号、带链接）
-3. [draft/draft.md](projects/2026-10-12-jev-valuation/draft/draft.md) · `04-copywriter` · 定稿片段
-4. [illustration/fig-jevons-paradox.jpg](projects/2026-10-12-jev-valuation/illustration/fig-jevons-paradox.jpg) · `05-visual` · 正文配图
-5. [cover/cover-2.35.jpg](projects/2026-10-12-jev-valuation/cover/cover-2.35.jpg) · `05-visual` · 2.35:1 封面
-6. [layout/README.md](projects/2026-10-12-jev-valuation/layout/README.md) · `06-layout` · 排版片段
-7. [review/review-report.md](projects/2026-10-12-jev-valuation/review/review-report.md) · `07-reviewer` · 验收报告（含打回记录）
-8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · 流转日志（含 2 次打回）
+用 Jev 估值一文（「Jev 估值 75 亿美元，是分类器换皮还是真创新？」）跑通的完整产物（选题、素材、稿件、配图、封面、排版、验收、流转日志）都在 [projects/2026-10-12-jev-valuation/](projects/2026-10-12-jev-valuation/)。
 
 ## 致谢
 
