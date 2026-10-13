@@ -4,9 +4,12 @@
 
 A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a subagent loaded with a fixed skill/spec, and roles talk over the A2A (Agent2Agent) protocol with three messages: task card, delivery, rejection. Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's writing style lives in `reference/`: `corpus/` is the author's own material (source of voice and viewpoints, highest weight) and `prefer/` holds liked third-party samples (form only: structure, rhythm, hooks; never their viewpoints or text). Send any bot a link or screenshot and it files it and triggers a style refresh.
 
-![Cover example](docs/showcase/cover-2.35.jpg)
-
 ## Flow
+<p align="center"><img src="docs/showcase/workflow.en.png" width="900" alt="Workflow"></p>
+
+<details>
+<summary>Mermaid text version</summary>
+
 ```mermaid
 flowchart LR
   N[01 News] --> I[02 Ideation]
@@ -20,6 +23,8 @@ flowchart LR
   Q -->|accepted| C
   C -->|HTML + cover| User((User))
 ```
+
+</details>
 
 If the reviewer rejects, it sends a rejection to the owning role, which reworks and is reviewed again. Once everything passes, the chief of staff delivers exactly two things: the WeChat-ready HTML in `layout/` and the 2.35:1 cover in `cover/`.
 
@@ -90,19 +95,27 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 - **OpenClaw**: put `bots/04-copywriter/` into OpenClaw's skills directory (e.g. `~/.openclaw/skills/gzh-copywriter/`), restart the session, and invoke `gzh-copywriter`.
 
 ## Showcase
-| Snippet | Description |
-|---|---|
-| ![01-title-lead-card](docs/showcase/01-title-lead-card.png) | Title and lead card |
-| ![02-pull-quote-highlight](docs/showcase/02-pull-quote-highlight.png) | Pull quote and highlighted sentence |
-| ![03-compare-card](docs/showcase/03-compare-card.png) | Compare cards |
-| ![04-screenshot-citations](docs/showcase/04-screenshot-citations.png) | Screenshot citations |
-| ![05-comparison-table](docs/showcase/05-comparison-table.png) | Comparison table |
-| ![06-end-card-references](docs/showcase/06-end-card-references.png) | References and coded end card |
+<table>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>Pull quote and highlighted sentence</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>Compare cards</sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>Screenshot citations</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>Comparison table</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>References and coded end card</sub></td>
+</tr>
+</table>
 
 The "grey octopus" mascot and an illustration:
 
-![Grey octopus](docs/showcase/octo-anchor-v1.jpg)
-![Jevons paradox figure](docs/showcase/fig-jevons-paradox.jpg)
+<table>
+<tr>
+<td align="center"><img src="docs/showcase/octo-anchor-v1.jpg" width="280" alt="octo"><br><sub>Grey octopus IP</sub></td>
+<td align="center"><img src="docs/showcase/fig-jevons-paradox.jpg" width="420" alt="fig"><br><sub>Jevons paradox figure</sub></td>
+</tr>
+</table>
 
 ## End-to-end example: Jev at a $7.5B valuation — a reskinned classifier or real innovation?
 Project: [projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/README.md)
@@ -114,6 +127,10 @@ Project: [projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/R
 6. [layout/README.md](projects/2026-10-12-jev-valuation/layout/README.md) · `06-layout` · Layout snippets
 7. [review/review-report.md](projects/2026-10-12-jev-valuation/review/review-report.md) · `07-reviewer` · Review report with rejections
 8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · A2A handoff log (incl. 2 rejections)
+
+## Acknowledgements
+
+This workflow was inspired by the "bot army" post shared on X by [@Jackywxsz](https://x.com/Jackywxsz): https://x.com/Jackywxsz/status/2108808842045956343
 
 ## License
 [MIT](LICENSE)

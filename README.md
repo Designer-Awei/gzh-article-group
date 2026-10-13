@@ -4,9 +4,12 @@
 
 一套**公众号文章多智能体工作流**，给 Codex、Cursor、Hermes、OpenClaw 等智能体直接装载使用。`bots/` 里每个角色就是一个装载了固定 skill/spec 的 subagent，角色之间按 A2A（Agent2Agent）协议用三种消息通信：任务卡、交付、打回。一篇文章一个 `projects/<slug>/` 文件夹，结构固定；作者的写作风格沉淀在 `reference/`：`corpus/` 是本人语料（观点和声音的来源，权重最高），`prefer/` 是喜欢的第三方风格样本（只借鉴结构、节奏、钩子，不抄观点）。随时把链接或截图丢给任意 bot，它会归档并触发风格刷新。
 
-![封面示例](docs/showcase/cover-2.35.jpg)
-
 ## 流程
+<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
+
+<details>
+<summary>mermaid 文本版</summary>
+
 ```mermaid
 flowchart LR
   N[01 资讯官] --> I[02 灵感官]
@@ -20,6 +23,8 @@ flowchart LR
   Q -->|通过| C
   C -->|HTML + 封面| User((用户))
 ```
+
+</details>
 
 审核官不通过就用 rejection 打回负责角色，返工后重新验收；全部通过后，大管家只向用户交付两样：`layout/` 里可直接粘贴进公众号的 HTML，和 `cover/` 里的 2.35:1 封面。
 
@@ -90,19 +95,27 @@ gzh-article-group/
 - **OpenClaw**：把 `bots/04-copywriter/` 放进 OpenClaw 的 skills 目录（如 `~/.openclaw/skills/gzh-copywriter/`），重启会话后按 `gzh-copywriter` 调用。
 
 ## 展示
-| 片段 | 说明 |
-|---|---|
-| ![01-title-lead-card](docs/showcase/01-title-lead-card.png) | 标题与导语卡 |
-| ![02-pull-quote-highlight](docs/showcase/02-pull-quote-highlight.png) | 金句卡与重点句高亮 |
-| ![03-compare-card](docs/showcase/03-compare-card.png) | 对比卡 |
-| ![04-screenshot-citations](docs/showcase/04-screenshot-citations.png) | 截图引用与来源标注 |
-| ![05-comparison-table](docs/showcase/05-comparison-table.png) | 对比表 |
-| ![06-end-card-references](docs/showcase/06-end-card-references.png) | 引用清单与代码排版文末卡片 |
+<table>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>金句卡与重点句高亮</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>对比卡</sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><img src="docs/showcase/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>截图引用与来源标注</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>对比表</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>引用清单与代码排版文末卡片</sub></td>
+</tr>
+</table>
 
 IP 形象「灰章鱼」与配图：
 
-![灰章鱼](docs/showcase/octo-anchor-v1.jpg)
-![杰文斯悖论配图](docs/showcase/fig-jevons-paradox.jpg)
+<table>
+<tr>
+<td align="center"><img src="docs/showcase/octo-anchor-v1.jpg" width="280" alt="octo"><br><sub>灰章鱼 IP</sub></td>
+<td align="center"><img src="docs/showcase/fig-jevons-paradox.jpg" width="420" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
+</tr>
+</table>
 
 ## 全链路示例：Jev 估值 75 亿美元，是分类器换皮还是真创新？
 项目：[projects/2026-10-12-jev-valuation](projects/2026-10-12-jev-valuation/README.md)
@@ -114,6 +127,10 @@ IP 形象「灰章鱼」与配图：
 6. [layout/README.md](projects/2026-10-12-jev-valuation/layout/README.md) · `06-layout` · 排版片段
 7. [review/review-report.md](projects/2026-10-12-jev-valuation/review/review-report.md) · `07-reviewer` · 验收报告（含打回记录）
 8. [handoff.json](projects/2026-10-12-jev-valuation/handoff.json) · `all` · A2A 流转日志（含 2 次打回）
+
+## 致谢
+
+本工作流的灵感来自 [@Jackywxsz](https://x.com/Jackywxsz) 在 X 上分享的「bot 军团」帖子：https://x.com/Jackywxsz/status/2108808842045956343
 
 ## 许可
 [MIT](LICENSE)
