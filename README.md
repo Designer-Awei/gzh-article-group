@@ -97,14 +97,14 @@ gzh-article-group/
 ## 展示
 <table>
 <tr>
-<td align="center" width="33%"><img src="docs/showcase/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>金句卡与重点句高亮</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>对比卡</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>金句卡与重点句高亮</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>对比卡</sub></td>
 </tr>
 <tr>
-<td align="center" width="33%"><img src="docs/showcase/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>截图引用与来源标注</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>对比表</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>引用清单与代码排版文末卡片</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>截图引用与来源标注</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>对比表</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>引用清单与代码排版文末卡片</sub></td>
 </tr>
 </table>
 
@@ -112,8 +112,8 @@ IP 形象「灰章鱼」与配图：
 
 <table>
 <tr>
-<td align="center"><img src="docs/showcase/octo-anchor-v1.jpg" width="280" alt="octo"><br><sub>灰章鱼 IP</sub></td>
-<td align="center"><img src="docs/showcase/fig-jevons-paradox.jpg" width="420" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>灰章鱼 IP</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
 </tr>
 </table>
 

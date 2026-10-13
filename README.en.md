@@ -97,14 +97,14 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 ## Showcase
 <table>
 <tr>
-<td align="center" width="33%"><img src="docs/showcase/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>Pull quote and highlighted sentence</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>Compare cards</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/02-pull-quote-highlight.png" width="260" alt="02-pull-quote-highlight"><br><sub>Pull quote and highlighted sentence</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/03-compare-card.png" width="260" alt="03-compare-card"><br><sub>Compare cards</sub></td>
 </tr>
 <tr>
-<td align="center" width="33%"><img src="docs/showcase/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>Screenshot citations</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>Comparison table</sub></td>
-<td align="center" width="33%"><img src="docs/showcase/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>References and coded end card</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/04-screenshot-citations.png" width="260" alt="04-screenshot-citations"><br><sub>Screenshot citations</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/05-comparison-table.png" width="260" alt="05-comparison-table"><br><sub>Comparison table</sub></td>
+<td align="center" width="33%"><img src="docs/showcase/grid/06-end-card-references.png" width="260" alt="06-end-card-references"><br><sub>References and coded end card</sub></td>
 </tr>
 </table>
 
@@ -112,8 +112,8 @@ The "grey octopus" mascot and an illustration:
 
 <table>
 <tr>
-<td align="center"><img src="docs/showcase/octo-anchor-v1.jpg" width="280" alt="octo"><br><sub>Grey octopus IP</sub></td>
-<td align="center"><img src="docs/showcase/fig-jevons-paradox.jpg" width="420" alt="fig"><br><sub>Jevons paradox figure</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>Grey octopus IP</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></td>
 </tr>
 </table>
 
