@@ -2,7 +2,7 @@
 
 中文 | [English](README.en.md)
 
-一套**公众号文章多智能体工作流**，给 Codex、Cursor、Hermes、OpenClaw 等智能体直接装载使用。`bots/` 里每个角色就是一个装载了固定 skill/spec 的 subagent，角色之间按 A2A（Agent2Agent）协议用三种消息通信：任务卡、交付、打回。一篇文章一个 `projects/<slug>/` 文件夹，结构固定；作者的语料和写作风格沉淀在 `reference/`。
+一套**公众号文章多智能体工作流**，给 Codex、Cursor、Hermes、OpenClaw 等智能体直接装载使用。`bots/` 里每个角色就是一个装载了固定 skill/spec 的 subagent，角色之间按 A2A（Agent2Agent）协议用三种消息通信：任务卡、交付、打回。一篇文章一个 `projects/<slug>/` 文件夹，结构固定；作者的写作风格沉淀在 `reference/`：`corpus/` 是本人语料（观点和声音的来源，权重最高），`prefer/` 是喜欢的第三方风格样本（只借鉴结构、节奏、钩子，不抄观点）。随时把链接或截图丢给任意 bot，它会归档并触发风格刷新。
 
 ![封面示例](docs/showcase/cover-2.35.jpg)
 
@@ -40,7 +40,7 @@ gzh-article-group/
 │   ├── README.md  _template/
 │   └── 2026-10-12-jev-valuation/
 │       ├── handoff.json  brief/ source/ draft/ illustration/ cover/ layout/ review/
-├── reference/               README.md writing-style.template.md corpus/{articles,links,notes}/
+├── reference/               README.md writing-style.template.md corpus/{articles,links,notes,imgs}/ prefer/{links,articles,imgs}/
 ├── protocol/                task-card / delivery / rejection / handoff schemas + examples/
 ├── scripts/new-project.py
 └── docs/                    INIT.md showcase/
@@ -81,7 +81,7 @@ gzh-article-group/
 三种消息说明见 [protocol/README.md](protocol/README.md)。
 
 ## 快速开始
-1. **初始化**：让智能体执行 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)，清单见 [docs/INIT.md](docs/INIT.md)。第 1 步上传语料生成 `reference/writing-style.md`（可跳过，默认用 [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)）；第 2 步视觉官按账号定位建议 IP 形象（可跳过）。
+1. **初始化**：让智能体执行 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)，清单见 [docs/INIT.md](docs/INIT.md)。第 1 步上传本人语料（及可选的偏好样本）生成 `reference/writing-style.md`（可跳过，默认用 [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)）；第 2 步视觉官按账号定位建议 IP 形象（可跳过）。
 2. **开新文章**：`python3 scripts/new-project.py 2026-10-20-my-topic`，从 `projects/_template/` 生成固定结构和 `handoff.json`。
 3. **装载角色**（以文案官为例）：
 - **Codex**：在仓库根目录运行，Codex 自动读取 `AGENTS.md`；提示「按 `bots/04-copywriter/SKILL.md` 担任文案官，处理 `projects/<slug>`」。也可把 `bots/04-copywriter/` 复制到 `~/.codex/skills/gzh-copywriter/` 作为 skill 加载。

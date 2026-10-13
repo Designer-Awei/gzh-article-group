@@ -5,7 +5,8 @@
 ## 初始化清单
 - [ ] **第 1 步 · 写作风格**（文案官依赖）
   - 向用户索取原始语料：过往博客/公众号文章、日记、长评论、口喷转写、文章链接。
-  - 文件放入 `reference/corpus/articles|notes/`，链接写入 `reference/corpus/links/links.md`。
+  - 文件放入 `reference/corpus/articles|notes/`，自己的帖子截图放 `reference/corpus/imgs/`，链接写入 `reference/corpus/links/links.md`。
+  - 再问一句：有没有喜欢的别人的文章或账号？有就放入 `reference/prefer/`（只借鉴形式，不借观点）。
   - 按 `reference/README.md` 生成 `reference/writing-style.md`，给用户看摘要确认。
   - 用户跳过 → `reference/writing-style.md` 写明使用默认风格 [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)（卡兹克公开写作 skill），并提示以后可补语料。
 - [ ] **第 2 步 · 账号定位与 IP**（由 05-visual 发问）
@@ -17,4 +18,4 @@
 
 ---
 
-English summary: step 1 collect the user's corpus into `reference/corpus/` and build `reference/writing-style.md` (skip → default [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role asks about account positioning and proposes a matching IP character (skip → neutral, no mascot); step 3 news sources; step 4 confirm.
+English summary: step 1 collect the user's own corpus (text, links, screenshots) into `reference/corpus/` plus optional liked third-party samples into `reference/prefer/` (form only) and build `reference/writing-style.md` (skip → default [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role asks about account positioning and proposes a matching IP character (skip → neutral, no mascot); step 3 news sources; step 4 confirm.

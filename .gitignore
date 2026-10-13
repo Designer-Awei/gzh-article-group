@@ -8,3 +8,6 @@ projects/*/layout/preview-standalone.html
 reference/corpus/**
 !reference/corpus/*/
 !reference/corpus/*/.gitkeep
+reference/prefer/**
+!reference/prefer/*/
+!reference/prefer/*/.gitkeep

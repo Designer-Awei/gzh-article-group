@@ -2,7 +2,7 @@
 
 [中文](README.md) | English
 
-A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a subagent loaded with a fixed skill/spec, and roles talk over the A2A (Agent2Agent) protocol with three messages: task card, delivery, rejection. Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's corpus and writing style live in `reference/`.
+A **multi-agent workflow for WeChat Official Account (公众号) articles**, built to be loaded directly by agents such as Codex, Cursor, Hermes and OpenClaw. Each role in `bots/` is a subagent loaded with a fixed skill/spec, and roles talk over the A2A (Agent2Agent) protocol with three messages: task card, delivery, rejection. Each article lives in one `projects/<slug>/` folder with a fixed layout; the author's writing style lives in `reference/`: `corpus/` is the author's own material (source of voice and viewpoints, highest weight) and `prefer/` holds liked third-party samples (form only: structure, rhythm, hooks; never their viewpoints or text). Send any bot a link or screenshot and it files it and triggers a style refresh.
 
 ![Cover example](docs/showcase/cover-2.35.jpg)
 
@@ -40,7 +40,7 @@ gzh-article-group/
 │   ├── README.md  _template/
 │   └── 2026-10-12-jev-valuation/
 │       ├── handoff.json  brief/ source/ draft/ illustration/ cover/ layout/ review/
-├── reference/               README.md writing-style.template.md corpus/{articles,links,notes}/
+├── reference/               README.md writing-style.template.md corpus/{articles,links,notes,imgs}/ prefer/{links,articles,imgs}/
 ├── protocol/                task-card / delivery / rejection / handoff schemas + examples/
 ├── scripts/new-project.py
 └── docs/                    INIT.md showcase/
@@ -81,7 +81,7 @@ The reviewer rejects the layout role ([rejection.schema.json](protocol/rejection
 See [protocol/README.md](protocol/README.md) for all three messages.
 
 ## Quick start
-1. **Initialize**: have an agent run [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md); checklist in [docs/INIT.md](docs/INIT.md). Step 1 uploads your corpus to build `reference/writing-style.md` (skippable, defaults to [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role proposes an IP character matching your account positioning (skippable).
+1. **Initialize**: have an agent run [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md); checklist in [docs/INIT.md](docs/INIT.md). Step 1 uploads your own corpus (plus optional liked samples) to build `reference/writing-style.md` (skippable, defaults to [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role proposes an IP character matching your account positioning (skippable).
 2. **Start an article**: `python3 scripts/new-project.py 2026-10-20-my-topic` creates the fixed layout and `handoff.json` from `projects/_template/`.
 3. **Load a role** (copywriter as example):
 - **Codex**: run at the repo root; Codex reads `AGENTS.md` automatically. Prompt "act as the copywriter per `bots/04-copywriter/SKILL.md` for `projects/<slug>`". Or copy `bots/04-copywriter/` to `~/.codex/skills/gzh-copywriter/` to load it as a skill.

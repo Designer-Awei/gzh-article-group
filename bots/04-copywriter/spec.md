@@ -19,3 +19,7 @@
 
 ## 可写范围
 - `projects/<slug>/` 中归属本角色的子文件夹，见 projects/README.md
+
+
+## 风格刷新
+收到刷新任务时按 reference/README.md 重建 writing-style.md：观点只来自 corpus/，prefer/ 只借鉴形式，绝不复制他人观点或原句。
