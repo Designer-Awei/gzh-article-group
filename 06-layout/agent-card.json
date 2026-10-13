@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-layout",
+  "description": "Lays out WeChat-ready HTML from draft, figures and screenshots. 把定稿、配图、截图排成可粘贴进公众号的 HTML",
+  "url": "https://example.com/a2a/layout",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "layout",
+      "name": "排版官 Layout Designer",
+      "description": "Lays out WeChat-ready HTML from draft, figures and screenshots",
+      "tags": [
+        "wechat",
+        "content",
+        "layout"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的排版官环节"
+      ]
+    }
+  ]
+}

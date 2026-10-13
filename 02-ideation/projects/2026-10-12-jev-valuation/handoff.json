@@ -1,0 +1,10 @@
+{
+  "project": "2026-10-12-jev-valuation",
+  "from": "02-ideation",
+  "to": "00-chief-of-staff",
+  "status": "accepted",
+  "artifacts": [
+    "topic.md"
+  ],
+  "updated": "2026-10-13"
+}

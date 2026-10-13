@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-ideation",
+  "description": "Turns brain-dumps into sharp topics through questioning. 接住口喷、追问深挖、收敛成选题",
+  "url": "https://example.com/a2a/ideation",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "ideation",
+      "name": "灵感官 Ideation Partner",
+      "description": "Turns brain-dumps into sharp topics through questioning",
+      "tags": [
+        "wechat",
+        "content",
+        "ideation"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的灵感官环节"
+      ]
+    }
+  ]
+}

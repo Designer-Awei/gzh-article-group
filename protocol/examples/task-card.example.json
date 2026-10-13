@@ -1,0 +1,15 @@
+{
+  "type": "task-card",
+  "id": "tc-001",
+  "project": "2026-10-12-jev-valuation",
+  "from": "00-chief-of-staff",
+  "to": "03-research",
+  "task": "为「Jev 估值 75 亿美元，是分类器换皮还是真创新？」搜集素材",
+  "inputs": [
+    "02-ideation/projects/2026-10-12-jev-valuation/topic.md"
+  ],
+  "acceptance": [
+    "每条素材有链接与可信度",
+    "截图只留关键部分"
+  ]
+}

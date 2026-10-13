@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-chief-of-staff",
+  "description": "Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover. 编排者与用户主入口：派任务卡、汇总问题、交付 HTML + 封面",
+  "url": "https://example.com/a2a/chief-of-staff",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "chief-of-staff",
+      "name": "大管家 Chief of Staff",
+      "description": "Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover",
+      "tags": [
+        "wechat",
+        "content",
+        "chief-of-staff"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的大管家环节"
+      ]
+    }
+  ]
+}

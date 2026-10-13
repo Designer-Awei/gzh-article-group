@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "handoff",
+  "type": "object",
+  "required": [
+    "project",
+    "from",
+    "to",
+    "status",
+    "artifacts"
+  ],
+  "properties": {
+    "project": {
+      "type": "string"
+    },
+    "from": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "to": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "in_progress",
+        "delivered",
+        "accepted",
+        "rejected",
+        "delivered_to_user",
+        "skipped"
+      ]
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "updated": {
+      "type": "string"
+    }
+  }
+}

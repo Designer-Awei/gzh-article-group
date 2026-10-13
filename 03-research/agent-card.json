@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-research",
+  "description": "Collects verifiable facts and screenshots. 为选题搜集可核实素材与截图",
+  "url": "https://example.com/a2a/research",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "research",
+      "name": "素材官 Researcher",
+      "description": "Collects verifiable facts and screenshots",
+      "tags": [
+        "wechat",
+        "content",
+        "research"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的素材官环节"
+      ]
+    }
+  ]
+}

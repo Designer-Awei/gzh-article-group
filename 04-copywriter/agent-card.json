@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-copywriter",
+  "description": "Writes the draft in the author's voice. 按作者风格写成稿",
+  "url": "https://example.com/a2a/copywriter",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "copywriter",
+      "name": "文案官 Copywriter",
+      "description": "Writes the draft in the author's voice",
+      "tags": [
+        "wechat",
+        "content",
+        "copywriter"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的文案官环节"
+      ]
+    }
+  ]
+}

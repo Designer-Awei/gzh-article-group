@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-visual",
+  "description": "Produces on-brand cover and figures. 出风格统一的封面与配图",
+  "url": "https://example.com/a2a/visual",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "visual",
+      "name": "视觉官 Visual Designer",
+      "description": "Produces on-brand cover and figures",
+      "tags": [
+        "wechat",
+        "content",
+        "visual"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的视觉官环节"
+      ]
+    }
+  ]
+}

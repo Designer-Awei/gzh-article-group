@@ -1,0 +1,11 @@
+{
+  "project": "2026-10-12-jev-valuation",
+  "from": "05-visual",
+  "to": "06-layout",
+  "status": "accepted",
+  "artifacts": [
+    "cover-2.35.jpg",
+    "fig-jevons-paradox.jpg"
+  ],
+  "updated": "2026-10-13"
+}

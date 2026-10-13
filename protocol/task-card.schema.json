@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protocol/task-card.schema.json",
+  "title": "task-card",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "project",
+    "from",
+    "to",
+    "task",
+    "inputs",
+    "acceptance"
+  ],
+  "properties": {
+    "type": {
+      "const": "task-card"
+    },
+    "id": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}-[a-z0-9-]+$"
+    },
+    "from": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "to": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "task": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "acceptance": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "due": {
+      "type": "string"
+    }
+  }
+}

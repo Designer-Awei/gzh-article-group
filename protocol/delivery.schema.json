@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protocol/delivery.schema.json",
+  "title": "delivery",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "project",
+    "from",
+    "to",
+    "artifacts",
+    "summary"
+  ],
+  "properties": {
+    "type": {
+      "const": "delivery"
+    },
+    "id": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "from": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "to": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "in_reply_to": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "questions_for_user": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

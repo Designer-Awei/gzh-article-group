@@ -1,0 +1,34 @@
+{
+  "protocolVersion": "0.3.0",
+  "name": "gzh-news",
+  "description": "Builds a weekday AI news digest. 每个工作日整理 AI 热点早报",
+  "url": "https://example.com/a2a/news",
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": true
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "news",
+      "name": "资讯官 News Scout",
+      "description": "Builds a weekday AI news digest",
+      "tags": [
+        "wechat",
+        "content",
+        "news"
+      ],
+      "examples": [
+        "处理项目 2026-10-12-jev-valuation 的资讯官环节"
+      ]
+    }
+  ]
+}

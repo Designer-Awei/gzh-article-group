@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "protocol/rejection.schema.json",
+  "title": "rejection",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "project",
+    "from",
+    "to",
+    "item",
+    "issues"
+  ],
+  "properties": {
+    "type": {
+      "const": "rejection"
+    },
+    "id": {
+      "type": "string"
+    },
+    "project": {
+      "type": "string"
+    },
+    "from": {
+      "const": "07-reviewer"
+    },
+    "to": {
+      "enum": [
+        "00-chief-of-staff",
+        "01-news",
+        "02-ideation",
+        "03-research",
+        "04-copywriter",
+        "05-visual",
+        "06-layout",
+        "07-reviewer",
+        "user"
+      ]
+    },
+    "item": {
+      "enum": [
+        "screenshots",
+        "copy",
+        "visuals",
+        "layout"
+      ]
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "location",
+          "problem",
+          "expected"
+        ],
+        "properties": {
+          "location": {
+            "type": "string"
+          },
+          "problem": {
+            "type": "string"
+          },
+          "expected": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

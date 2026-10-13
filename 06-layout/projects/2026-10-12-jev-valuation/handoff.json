@@ -1,0 +1,16 @@
+{
+  "project": "2026-10-12-jev-valuation",
+  "from": "06-layout",
+  "to": "07-reviewer",
+  "status": "accepted",
+  "artifacts": [
+    "README.md",
+    "snippets/01-title-lead-card.png",
+    "snippets/02-pull-quote-highlight.png",
+    "snippets/03-compare-card.png",
+    "snippets/04-screenshot-citations.png",
+    "snippets/05-comparison-table.png",
+    "snippets/06-end-card-references.png"
+  ],
+  "updated": "2026-10-13"
+}

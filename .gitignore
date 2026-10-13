@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.tar.gz
+**/projects/*/preview-standalone.html
+.env

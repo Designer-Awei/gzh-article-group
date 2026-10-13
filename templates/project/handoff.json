@@ -1,0 +1,8 @@
+{
+  "project": "{{slug}}",
+  "from": "{{role}}",
+  "to": "{{next}}",
+  "status": "pending",
+  "artifacts": [],
+  "updated": "{{date}}"
+}
