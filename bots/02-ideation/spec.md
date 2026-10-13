@@ -2,9 +2,10 @@
 
 ## 输入
 - 用户口喷
-- 近几天早报
+- 01-news 自动推送的早报 `news/YYYY-MM-DD.md`（单智能体模式下开聊前自行读取）
 
 ## 输出
+- news/angles/YYYY-MM-DD.md 预备的 2–3 个候选角度（本地，不入库；不主动推给用户）
 - projects/<slug>/brief/topic.md 选题总结
 
 ## 验收标准
@@ -16,4 +17,5 @@
 - 用户拍板 → 大管家
 
 ## 可写范围
-- `projects/<slug>/` 中归属本角色的子文件夹，见 projects/README.md
+- `news/angles/`（本地）
+- `projects/<slug>/brief/`

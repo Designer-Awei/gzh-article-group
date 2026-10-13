@@ -37,14 +37,14 @@
 | `docs/` | INIT.md 与 showcase/ 展示图 |
 
 ## 流转顺序
-01-news / 02-ideation → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派任务（单智能体时即切换到该角色；多智能体时发 task-card） → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
+01-news 每个工作日 11:00 发早报给用户，并自动推送给 02-ideation（单智能体模式下：开始聊选题时先读最新的 `news/YYYY-MM-DD.md`）→ 02-ideation 预备 2–3 个角度、等用户来聊，不主动打扰 → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派任务（单智能体时即切换到该角色；多智能体时发 task-card） → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
 
 ## 谁能写哪里
 | 角色 | 可写 |
 |---|---|
 | 00-chief-of-staff | `projects/<slug>/README.md`、`handoff.json`；运行 new-project.py；初始化时写 `reference/` |
 | 01-news | `news/`（本地，不入库） |
-| 02-ideation | `projects/<slug>/brief/` |
+| 02-ideation | `news/angles/`（本地）、`projects/<slug>/brief/` |
 | 03-research | `projects/<slug>/source/` |
 | 04-copywriter | `projects/<slug>/draft/`；按用户反馈更新 `reference/writing-style.md` |
 | 05-visual | `projects/<slug>/illustration/`、`cover/`；`bots/05-visual/config/ip/` |

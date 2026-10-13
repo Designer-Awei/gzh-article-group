@@ -1,0 +1,12 @@
+{
+  "type": "delivery",
+  "id": "dl-001",
+  "project": "2026-10-13-news-digest",
+  "from": "01-news",
+  "to": "02-ideation",
+  "artifacts": [
+    "news/2026-10-13.md"
+  ],
+  "summary": "今日 AI 早报 6 条（已发给用户）。正文：1. …… 2. ……",
+  "questions_for_user": []
+}

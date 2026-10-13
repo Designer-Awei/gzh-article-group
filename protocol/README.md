@@ -12,5 +12,8 @@ Roles talk only through three message types, sent as the `DataPart` of an A2A `M
 | delivery | 角色 → 下游 / 大管家 | 交付 / hand off output | [delivery.schema.json](delivery.schema.json) | [example](examples/delivery.example.json) |
 | rejection | 审核官 → 负责角色 | 打回 / send back for rework | [rejection.schema.json](rejection.schema.json) | [example](examples/rejection.example.json) |
 
+早报自动推送（01-news → 02-ideation）也是一条 delivery，见 [examples/news-digest.example.json](examples/news-digest.example.json)；它不属于某篇文章，`project` 用 `YYYY-MM-DD-news-digest`，不写 handoff.json。
+The weekday digest push is also a delivery: [examples/news-digest.example.json](examples/news-digest.example.json).
+
 `handoff.json` 格式见 [handoff.schema.json](handoff.schema.json)，示例见 [Jev 项目](../projects/2026-10-12-jev-valuation/handoff.json)。
 状态 status：`pending → in_progress → delivered → accepted | rejected`，最后 `delivered_to_user`；跳过用 `skipped`。

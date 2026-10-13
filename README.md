@@ -85,8 +85,8 @@ gzh-article-group/
 | 目录 | 角色 | 职责 |
 |---|---|---|
 | [00-chief-of-staff](bots/00-chief-of-staff/SKILL.md) | 大管家 | 编排者与用户主入口：派任务卡、汇总问题、交付 HTML + 封面 |
-| [01-news](bots/01-news/SKILL.md) | 资讯官 | 每个工作日整理 AI 热点早报 |
-| [02-ideation](bots/02-ideation/SKILL.md) | 灵感官 | 接住口喷、追问深挖、收敛成选题 |
+| [01-news](bots/01-news/SKILL.md) | 资讯官 | 每个工作日 11:00 发 AI 热点早报，并自动推送给灵感官 |
+| [02-ideation](bots/02-ideation/SKILL.md) | 灵感官 | 收到早报先备好 2–3 个角度，等你来聊；接住口喷、追问深挖、收敛成选题 |
 | [03-research](bots/03-research/SKILL.md) | 素材官 | 为选题搜集可核实素材与截图 |
 | [04-copywriter](bots/04-copywriter/SKILL.md) | 文案官 | 按作者风格写成稿 |
 | [05-visual](bots/05-visual/SKILL.md) | 视觉官 | 出风格统一的封面与配图 |

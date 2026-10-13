@@ -85,8 +85,8 @@ Agents should read [AGENTS.md](AGENTS.md), [CONVENTIONS.md](CONVENTIONS.md) and 
 | Directory | Role | Responsibility |
 |---|---|---|
 | [00-chief-of-staff](bots/00-chief-of-staff/SKILL.md) | Chief of Staff | Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover |
-| [01-news](bots/01-news/SKILL.md) | News Scout | Builds a weekday AI news digest |
-| [02-ideation](bots/02-ideation/SKILL.md) | Ideation Partner | Turns brain-dumps into sharp topics through questioning |
+| [01-news](bots/01-news/SKILL.md) | News Scout | Sends a weekday 11:00 AI digest and auto-forwards it to Ideation |
+| [02-ideation](bots/02-ideation/SKILL.md) | Ideation Partner | Pre-drafts 2–3 angles from the digest and waits for you; turns brain-dumps into sharp topics |
 | [03-research](bots/03-research/SKILL.md) | Researcher | Collects verifiable facts and screenshots |
 | [04-copywriter](bots/04-copywriter/SKILL.md) | Copywriter | Writes the draft in the author's voice |
 | [05-visual](bots/05-visual/SKILL.md) | Visual Designer | Produces on-brand cover and figures |

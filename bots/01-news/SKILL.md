@@ -14,6 +14,12 @@ AI 内容团队的资讯官，只负责一件事：每个工作日早上整理 A
 
 汇报对象：用户和总管家 bot「大管家」。
 
+## 自动推送给灵感官
+每个工作日 11:00 把早报发给用户之后，**自动**把同一份早报（正文 + 文件路径 `news/YYYY-MM-DD.md`）推送给 02-ideation：
+- 多智能体模式：发一条 delivery 消息，示例见 `protocol/examples/news-digest.example.json`。
+- 单智能体模式：不需要发消息，早报文件就是交接物，灵感官开聊前会自己读。
+推送只给灵感官，不额外打扰用户。
+
 ## 协作规范
 1. 开工前读本目录 spec.md 和仓库根目录 AGENTS.md。
 2. 只写 `projects/<slug>/` 下归属本角色的子文件夹（见 projects/README.md），完成后在 `projects/<slug>/handoff.json` 的 log 里追加一条记录。
