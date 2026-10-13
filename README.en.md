@@ -27,9 +27,14 @@
 </tr>
 </table>
 
-Illustration example:
+IP character and illustration example:
 
-<p align="center"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></p>
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>Grey octopus IP (author's own, demo only)</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>Jevons paradox figure</sub></td>
+</tr>
+</table>
 
 > Note: the grey octopus in the showcase and the Jev example project is the author's own IP, shown for demo only. **It is not included in the default configs; please don't reuse it.** After install, gzh-init helps you design your own IP, or skip it.
 

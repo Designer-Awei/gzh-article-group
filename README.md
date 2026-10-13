@@ -27,9 +27,14 @@
 </tr>
 </table>
 
-配图示例：
+IP 形象与配图示例：
 
-<p align="center"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></p>
+<table>
+<tr>
+<td align="center" width="50%"><img src="docs/showcase/grid/octo-anchor-v1.png" width="400" alt="octo"><br><sub>灰章鱼 IP（作者自有，仅演示）</sub></td>
+<td align="center" width="50%"><img src="docs/showcase/grid/fig-jevons-paradox.png" width="400" alt="fig"><br><sub>杰文斯悖论配图</sub></td>
+</tr>
+</table>
 
 > 注：展示图和 Jev 示例项目里出现的灰章鱼是作者本人的 IP，仅作演示，**不包含在仓库的默认配置里，请勿复用**。安装后 gzh-init 会帮你设计自己的 IP，或选择不用 IP。
 
