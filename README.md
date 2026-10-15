@@ -9,7 +9,7 @@
 - 一手素材 + 截图引证：每个事实都带出处，查不到就如实写，不编造
 - 学你自己的文风：投喂你的文章、日记、评论，也能喂你喜欢的别人的写法（只学形式，不抄观点）
 - 统一视觉：初始化时设计你自己的 IP 形象（也可以不用），封面和配图风格一致
-- 微信兼容排版母版：全内联样式，文末卡片用代码排，宽度自适应
+- 微信兼容排版母版库：4 套结构不同的母版（珊瑚默认 / 窗口终端 / 杂志特稿 / 时间线票根），按选题挑，见 [styles/INDEX.md](bots/06-layout/config/styles/INDEX.md)；全内联样式，共用一张代码排的文末签名卡
 - 审核官把关：截图、文稿、配图、排版逐项验收，不合格直接打回对应 bot
 - 任意智能体一键安装：Codex、Claude Code、Cursor、Hermes、OpenClaw 等都能用
 
@@ -122,6 +122,15 @@ gzh-article-group/
 1. **初始化**：让智能体执行 [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md)，清单见 [docs/INIT.md](docs/INIT.md)。第 1 步上传本人语料（及可选的偏好样本）生成 `reference/writing-style.md`（可跳过，默认用 [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)）；第 2 步视觉官按账号定位建议 IP 形象（可跳过）。
 2. **开新文章**：`python3 scripts/new-project.py 2026-10-20-my-topic`，从 `projects/_template/` 生成固定结构和 `handoff.json`。
 3. **装载角色**：按 [AGENTS.md](AGENTS.md) 的「自安装指南」选择方式（skills 目录、规则文件，或不安装、直接在仓库里读 `bots/*/SKILL.md`）。各工具的路径以其官方文档为准。
+
+## 实战沉淀的规则（2026-10-15）
+第二期文章跑完后，这些规则写进了各角色的 spec：
+- 文案：正文 `[xx]` 序号加文末两列引用表、一句话导读、去 AI 味清单、洞察式章节标题。
+- 排版：成品不带标题，副标题进「摘要」；截图不套框；代码窗不放复制按钮；GIF 宫格。
+- 视觉：用户明确要求才出图。
+- 审核：新增检查项。
+
+详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 全链路示例
 

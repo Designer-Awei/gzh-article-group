@@ -19,3 +19,6 @@ AI 内容团队的文案官，只负责一件事：把用户的口喷、灵感�
 1. 开工前读本目录 spec.md 和仓库根目录 AGENTS.md。
 2. 只写 `projects/<slug>/` 下归属本角色的子文件夹（见 projects/README.md），完成后在 `projects/<slug>/handoff.json` 的 log 里追加一条记录。
 3. 与其他角色的通信使用 protocol/ 中的 A2A 消息（task-card / delivery / rejection）。
+
+## 写稿规则
+动笔前除了 writing-style.md，还要读本目录 spec.md 的「写稿规则」（引用序号 + 文末引用表、一句话导读、标题和副标题不进正文、截图原话不重复、章内小标题、洞察式章节标题、去 AI 味清单、金句卡末行、GIF 标记位置）。

@@ -9,7 +9,7 @@
 - Primary sources + screenshot citations: every fact is sourced; if it can't be found, it says so instead of making it up
 - Learns your own voice: feed it your articles, diaries and comments, plus styles you like (form only, never others' viewpoints)
 - Consistent visuals: design your own IP character at setup (or go without), with matching cover and illustrations
-- WeChat-compatible layout master: fully inline styles, end card built in code so it adapts to width
+- WeChat-compatible layout library: 4 structurally different masters (coral default / window terminal / magazine feature / timeline ticket), pick per topic via [styles/INDEX.md](bots/06-layout/config/styles/INDEX.md); fully inline styles, one shared code-built end card
 - Reviewer gate: screenshots, copy, visuals and layout checked item by item; failures go back to the owning bot
 - One-line install for any agent: Codex, Claude Code, Cursor, Hermes, OpenClaw and more
 
@@ -122,6 +122,15 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 1. **Initialize**: have an agent run [bots/00-chief-of-staff/init/SKILL.md](bots/00-chief-of-staff/init/SKILL.md); checklist in [docs/INIT.md](docs/INIT.md). Step 1 uploads your own corpus (plus optional liked samples) to build `reference/writing-style.md` (skippable, defaults to [khazix-writer](https://github.com/KKKKhazix/khazix-skills/tree/main/khazix-writer)); step 2 the visual role proposes an IP character matching your account positioning (skippable).
 2. **Start an article**: `python3 scripts/new-project.py 2026-10-20-my-topic` creates the fixed layout and `handoff.json` from `projects/_template/`.
 3. **Load roles**: follow the self-install guide in [AGENTS.md](AGENTS.md) (skills directory, rules file, or no install at all: read `bots/*/SKILL.md` in place). Check each tool's own docs for exact paths.
+
+## Rules learned in production (2026-10-15)
+After the second article shipped, these rules went into the role specs:
+- Copy: `[xx]` citations with a two-column reference table, a one-sentence lead, an anti-AI-tone list, and insight-style section titles.
+- Layout: no title in the output; the subtitle goes into WeChat's summary field. Screenshots are unframed, code windows have no copy button, and GIFs can go in grids.
+- Visual: images are generated only when the user explicitly asks.
+- Review: new check items.
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## End-to-end example
 

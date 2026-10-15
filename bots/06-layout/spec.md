@@ -4,10 +4,11 @@
 - draft/
 - illustration/
 - source/shots/
-- bots/06-layout/config/master/
+- bots/06-layout/config/master/（引擎）与 bots/06-layout/config/styles/（母版库，见 INDEX.md）
 
 ## 输出
-- projects/<slug>/layout/preview-standalone.html
+- projects/<slug>/layout/preview-standalone.html（图片 base64 内嵌，用户用它粘贴进公众号；wechat-paste.html 的图片是 img/ 相对路径，粘贴会丢图）
+- projects/<slug>/layout/summary.txt（副标题原文，填公众号「摘要」栏）
 - projects/<slug>/layout/snippets/ 手机预览片段
 
 ## 验收标准
@@ -21,3 +22,18 @@
 
 ## 可写范围
 - `projects/<slug>/` 中归属本角色的子文件夹，见 projects/README.md
+
+## 排版规则（2026-10-15 起，来自第二期实战）
+| 规则 | 取代 |
+|---|---|
+| 成品不带标题和副标题（用户自己粘贴标题），副标题写进 summary.txt；publish 的 `[head]` 检查 | 标题区排在正文最前 |
+| 开头区要醒目，用标签、日期、阅读时长、章节数和一句话导语拼成，不能只有一条竖线；每套母版的开头区都不一样（参考 gzh-design-skill 的开头设计）；日期只在写明实际发布日期时填 | 标题下面加一条竖线的副标题 |
+| 素材截图和 GIF 直接放裁好的图，只有 1px 浅灰细边和小圆角，不套窗口或相框；窗口卡片只用在正文组件上 | 截图套苹果窗口或拍立得 |
+| 代码和命令四套都用 02-窗口终端的代码窗（三色圆点、深色终端），不放「复制」按钮，也不放「左右滑动」提示（微信不能运行 JS，原生代码块也没有复制）；长命令在空格或逗号处折行，不横向滚动，不在单词中间断开；`[codecopy]` `[codebreak]` 检查 | 01 旧代码卡、右上角复制按钮 |
+| `### 小标题` 和段首 `**引子：**` 是章内区分，各套用自己的标记 | — |
+| 引用：正文序号排成上标，文末引用表只有编号、链接两列，编号列 nowrap 且至少 44px；长链接只在 `/ . - ? & =` 后插 `<wbr>` 断行，不用 break-all；`[cite]` `[ref]` `[link]` 检查 | 句尾链接加短域名、最多 5 个 |
+| 图注在 390px 下只占一行，描述画面，不加「来源：」；超行就精简文字，不缩字号；`[cap]` `[capline]` 检查 | — |
+| 金句卡、导语卡、重点卡、小标题末行 ≥3 字，自动微调写进 card_fit；内联高亮调不动就退回文案官；`[orphan]` 检查 | — |
+| GIF 宫格：`gif_grid` 或稿件标记排成 2×2 或 1×N，用 table 实现，格间 6px，纯图加 4px 圆角，每格一行图注；竖图可以用 `insert_after` 第三项 `{"width": 208}` 缩宽；稿件标记优先，重复的图自动去重（`[grid]`） | — |
+| 母版库：每套在版式元素上真正不同（苹果窗口三色灯、SMIL 动态 SVG、衬线感标题、票根、时间线等），不能只换颜色；所有母版共用 01 的带边框文末签名卡，theme 不准覆盖；SVG 动画只用内联 SVG 加 SMIL | 只换色的母版 |
+| 数据高亮 white-space:nowrap；`[nowrap]` 检查 | — |
