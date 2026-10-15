@@ -14,6 +14,8 @@
 - One-line install for any agent: Codex, Claude Code, Cursor, Hermes, OpenClaw and more
 
 ## Showcase
+<p align="center"><img src="docs/showcase/workflow.en.png" width="900" alt="Workflow"></p>
+
 <table>
 <tr>
 <td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>Title and lead card</sub></td>
@@ -48,7 +50,6 @@ Install https://github.com/Designer-Awei/gzh-article-group. Read AGENTS.md in th
 ```
 
 ## Flow
-<p align="center"><img src="docs/showcase/workflow.en.png" width="900" alt="Workflow"></p>
 
 
 If the reviewer rejects, it sends a rejection to the owning role, which reworks and is reviewed again. Once everything passes, the chief of staff delivers exactly two things: the WeChat-ready HTML in `layout/` and the 2.35:1 cover in `cover/`.

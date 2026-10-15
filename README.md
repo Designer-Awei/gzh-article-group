@@ -14,6 +14,8 @@
 - 任意智能体一键安装：Codex、Claude Code、Cursor、Hermes、OpenClaw 等都能用
 
 ## 展示
+<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
+
 <table>
 <tr>
 <td align="center" width="33%"><img src="docs/showcase/grid/01-title-lead-card.png" width="260" alt="01-title-lead-card"><br><sub>标题与导语卡</sub></td>
@@ -48,7 +50,6 @@ IP 形象与配图示例：
 ```
 
 ## 流程
-<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
 
 
 审核官不通过就用 rejection 打回负责角色，返工后重新验收；全部通过后，大管家只向用户交付两样：`layout/` 里可直接粘贴进公众号的 HTML，和 `cover/` 里的 2.35:1 封面。

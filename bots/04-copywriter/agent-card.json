@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.3.0",
   "name": "gzh-copywriter",
-  "description": "Writes the draft in the author's voice. 按作者风格写成稿",
+  "description": "Writes the draft in the author's voice. 按作者风格写成稿：事实只取自素材包，正文 [1][2] 序号引用、文末两列参考资料表，导读一句话，章节标题洞察式",
   "url": "https://example.com/a2a/copywriter",
   "version": "1.0.0",
   "capabilities": {
@@ -20,7 +20,7 @@
     {
       "id": "copywriter",
       "name": "文案官 Copywriter",
-      "description": "Writes the draft in the author's voice",
+      "description": "Writes the draft in the author's voice, following writing-style.md (2026-10-15): numbered [n] citations with a two-column reference table at the end, one-sentence lead, insight-style section headings, no AI-sounding phrasing. 按 2026-10-15 写作规则写稿",
       "tags": [
         "wechat",
         "content",

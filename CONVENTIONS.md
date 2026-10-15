@@ -7,7 +7,8 @@
 | 项目文件夹 | `projects/<slug>/`，子目录固定：brief/ source/ draft/ illustration/ cover/ layout/ review/ | `projects/2026-10-12-jev-valuation/cover/` |
 | 流转日志 | `projects/<slug>/handoff.json` 的 `log` 追加，不改历史 | — |
 | 消息 id | `tc-NNN` / `dl-NNN` / `rj-NNN`，项目内递增 | `rj-002` |
-| 素材编号 | `M1, M2, …`，正文以 `[M1]` 引用 | `[M4]` |
+| 素材编号 | `M1, M2, …`，只在素材包内部（source/materials.md）使用，成稿正文不出现 | `M4` |
+| 正文引用 | 句尾写 `[1]` `[2]`…，按首次出现从小到大，同一出处可重复；文末 `## 参考资料` 放一张只有「编号 \| 链接」两列的表，和正文序号一一对应；正文不放 Markdown 链接 | `[3]` |
 | 图片 | 小写英文+连字符；封面写比例 | `cover-2.35.jpg` |
 | 路径 | 文档与消息里一律写仓库相对路径 | `bots/05-visual/config/visual-style.md` |
 
