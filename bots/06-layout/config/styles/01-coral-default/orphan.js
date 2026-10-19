@@ -20,7 +20,7 @@ const puppeteer=require('puppeteer');
   // 各套母版的识别样式（去空白后的 style 片段）。STYLE 由文件头常量决定：01 用内置 '01'；其他母版由 PROFILE 指定
   const P=PROFILE||{'01':{quote:'font-size:17px;line-height:1.75;font-weight:bold',lead:'font-size:16px;line-height:1.8;color:#222;font-weight:bold',
       head:['font-size:18px;line-height:1.5;font-weight:bold;color:#111','font-size:18px;font-weight:bold;color:#111;border-bottom:3px','font-size:16px;line-height:1.6;font-weight:bold;color:#111'],
-      cap:'font-size:12px;line-height:1.6;color:#888;text-align:center',hl:'background:#FDE9E6;color:#111;padding:1px2px',marker:'background-color:rgba(242,107,91,0.16);border-bottom:2pxsolid#F26B5B'}}[STYLE];
+      cap:'font-size:12px;line-height:1.6;color:#888;text-align:center',hl:'background:#FDE9E6;color:#111;padding:1px2px',marker:'background-color:rgba(242,107,91,0.16);border-bottom:2pxsolid#F26B5B',citecard:'font-size:14px;line-height:1.75;color:#444;text-align:left;word-break:normal'}}[STYLE];
   const key=s=>s.replace(/\s/g,'').slice(0,12);
   const PAD=a=>a.map(v=>['padding-left',v,'padding-right',v]);
   document.querySelectorAll('p,span,td').forEach(e=>{
@@ -37,6 +37,7 @@ const puppeteer=require('puppeteer');
    else if(e.tagName!='TD'&&P.head.some(h=>st(e,h)))cards.push({kind:'小标题',el:e,box:e,key:'h:'+key(t),
      tries:[['letter-spacing','0px'],['font-size',(parseFloat(getComputedStyle(e).fontSize)-1)+'px'],['font-size',(parseFloat(getComputedStyle(e).fontSize)-1)+'px','letter-spacing','0px'],['font-size',(parseFloat(getComputedStyle(e).fontSize)-2)+'px'],['font-size',(parseFloat(getComputedStyle(e).fontSize)-2)+'px','letter-spacing','0px']]});
    else if(e.tagName=='P'&&st(e,P.cap))cards.push({kind:'图注',el:e,box:e,tries:[]});
+   else if(e.tagName=='P'&&P.citecard&&st(e,P.citecard))cards.push({kind:'引文卡',el:e,box:e.parentElement,key:key(t),tries:PAD(['12px','10px','16px','18px'])});  // 2026-10-19b：引文卡片，末行 ≤2 个词时先试卡片左右内边距（不改字）
    else if(e.tagName=='SPAN'&&st(e,P.hl))cards.push({kind:'highlight',el:e,box:e,tries:[]});
    else if(e.tagName=='SPAN'&&st(e,P.marker))cards.push({kind:'marker',el:e,box:e,tries:[]});
   });

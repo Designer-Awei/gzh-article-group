@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.3.0",
   "name": "gzh-visual",
-  "description": "Produces on-brand cover and figures. 出风格统一的封面与配图",
+  "description": "Produces on-brand body illustrations (the user makes the cover). 出风格统一的正文配图（封面由用户自己做）",
   "url": "https://example.com/a2a/visual",
   "version": "1.0.0",
   "capabilities": {
@@ -20,7 +20,7 @@
     {
       "id": "visual",
       "name": "视觉官 Visual Designer",
-      "description": "Produces on-brand cover and figures",
+      "description": "Produces on-brand body illustrations (the user makes the cover)",
       "tags": [
         "wechat",
         "content",

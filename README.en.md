@@ -4,11 +4,11 @@
 
 **Give it a topic, get back a WeChat article ready to paste.**
 
-- Topic to finished piece: one topic in, laid-out HTML plus a cover out
+- Topic to finished piece: one topic in, one laid-out HTML ready to paste into WeChat out (you make the cover yourself)
 - 8 bots with fixed jobs: news, ideation, research, copy, visuals, layout, review, plus a chief of staff; each builds up its own experience
 - Primary sources + screenshot citations: every fact is sourced; if it can't be found, it says so instead of making it up
 - Learns your own voice: feed it your articles, diaries and comments, plus styles you like (form only, never others' viewpoints)
-- Consistent visuals: design your own IP character at setup (or go without), with matching cover and illustrations
+- Consistent visuals: design your own IP character at setup (or go without), with matching body illustrations
 - WeChat-compatible layout library: 4 structurally different masters (coral default / window terminal / magazine feature / timeline ticket), pick per topic via [styles/INDEX.md](bots/06-layout/config/styles/INDEX.md); fully inline styles, one shared code-built end card
 - Reviewer gate: screenshots, copy, visuals and layout checked item by item; failures go back to the owning bot
 - One-line install for any agent: Codex, Claude Code, Cursor, Hermes, OpenClaw and more
@@ -51,7 +51,7 @@ Install https://github.com/Designer-Awei/gzh-article-group. Read AGENTS.md in th
 <p align="center"><img src="docs/showcase/workflow.en.png" width="900" alt="Workflow"></p>
 
 
-If the reviewer rejects, it sends a rejection to the owning role, which reworks and is reviewed again. Once everything passes, the chief of staff delivers exactly two things: the WeChat-ready HTML in `layout/` and the 2.35:1 cover in `cover/`.
+If the reviewer rejects, it sends a rejection to the owning role, which reworks and is reviewed again. Once everything passes, the chief of staff delivers exactly one thing: the full `preview-standalone.html`, ready to paste into WeChat, copied into your folder for this issue, with the summary line sent in chat. You make the cover yourself. Judgment calls along the way are made for you based on your preferences and listed at delivery; only unverifiable, risk-sensitive facts are escalated to you.
 
 ## Run modes
 | Mode | For | How |
@@ -88,12 +88,12 @@ Agents should read [AGENTS.md](AGENTS.md), [CONVENTIONS.md](CONVENTIONS.md) and 
 ## Roles
 | Directory | Role | Responsibility |
 |---|---|---|
-| [00-chief-of-staff](bots/00-chief-of-staff/SKILL.md) | Chief of Staff | Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover |
+| [00-chief-of-staff](bots/00-chief-of-staff/SKILL.md) | Chief of Staff | Orchestrator and user entry: dispatches task cards, makes judgment calls for you, delivers the full HTML |
 | [01-news](bots/01-news/SKILL.md) | News Scout | Sends a weekday 11:00 AI digest and auto-forwards it to Ideation |
 | [02-ideation](bots/02-ideation/SKILL.md) | Ideation Partner | Pre-drafts 2–3 angles from the digest and waits for you; turns brain-dumps into sharp topics |
 | [03-research](bots/03-research/SKILL.md) | Researcher | Collects verifiable facts and screenshots |
 | [04-copywriter](bots/04-copywriter/SKILL.md) | Copywriter | Writes the draft in the author's voice |
-| [05-visual](bots/05-visual/SKILL.md) | Visual Designer | Produces on-brand cover and figures |
+| [05-visual](bots/05-visual/SKILL.md) | Visual Designer | Produces on-brand body illustrations (you make the cover) |
 | [06-layout](bots/06-layout/SKILL.md) | Layout Designer | Lays out WeChat-ready HTML from draft, figures and screenshots |
 | [07-reviewer](bots/07-reviewer/SKILL.md) | Reviewer | Final QA gate; rejects back to the owning role |
 
@@ -127,8 +127,17 @@ See [protocol/README.md](protocol/README.md) for all three messages.
 After the second article shipped, these rules went into the role specs:
 - Copy: `[xx]` citations with a two-column reference table, a one-sentence lead, an anti-AI-tone list, and insight-style section titles.
 - Layout: no title in the output; the subtitle goes into WeChat's summary field. Screenshots are unframed, code windows have no copy button, and GIFs can go in grids.
-- Visual: images are generated only when the user explicitly asks.
+- Visual: images are generated only when the user explicitly asks (dropped on 2026-10-19, see below).
 - Review: new check items.
+
+## Rules learned in production (2026-10-19)
+After the third article, these were added (summary in the "团队固定规则" table of [CONVENTIONS.md](CONVENTIONS.md)):
+- Flow: all judgment calls are made automatically from your preferences, with no to-confirm lists; only unverifiable, risk-sensitive facts come back to you. Delivery is the full HTML only, with the summary sent in chat.
+- Copy: at most 6 citations per article; comparisons as in-body tables; original sources quoted as screenshots, not quote cards; demos credited as "X 上 @author 做了个……"; no sentences that expose the reasoning process, no short-clause paragraph openings, no filler stance sentences, a playful human voice; a single quote card at the ending.
+- Research: screenshots start and end on full sentences and stay legible at phone width.
+- Layout: in-body comparison table, side-by-side double image, a check that two quote cards never share a screen, a half-screen image height check, and a long-link fix; GIFs use the same adaptive width as other images.
+- Visual: the user makes the cover; the team only makes body illustrations, generated directly when the chief of staff asks.
+- Review: checks 15–18 added.
 
 See [CHANGELOG.md](CHANGELOG.md).
 

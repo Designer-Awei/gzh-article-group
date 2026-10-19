@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """排版母版 v2.1（gzh-design-skill + 微信内容结构规范兼容）：python3 build.py 稿件.md out.html layout-map.json"""
-import re, sys, json, html
+import re, sys, json, html, os
 A="#F26B5B"; AL="#FDE9E6"; T="#2b2b2b"; G="#888"; LN="#eee"; BG="#f7f7f7"
 FONT=None  # 微信规范第3节：不设置 font-family，使用公众号默认字体栈
 S={
@@ -36,10 +36,17 @@ S={
  "sub":"margin:0;font-size:16px;line-height:1.6;font-weight:bold;color:#111;",
  # 段首加粗引子（段落开头的 **xx：** / **xx**，2026-10-15g）：珊瑚色加粗 + 3×14 珊瑚短竖条，和章节内小标题的 4×16 竖条同一套；还是正文段落，不是小标题
  "leadin":f"font-weight:bold;color:{A};",
+ # 正文对比表格 v2（2026-10-19d）：手机上看得清的 3 列左右小表；layout-map "body_table": "v2" 才启用（旧稿默认表格不变）
+ "bt_wrap":f"margin:8px 0 22px;border-top:2px solid {A};",
+ "bt_table":"width:100%;table-layout:fixed;border-collapse:collapse;margin:0;font-size:14px;line-height:1.6;",
+ "bt_th":f"background-color:{AL};border:0;border-bottom:1px solid #F3C6BF;padding:8px 6px;text-align:left;vertical-align:bottom;font-size:14px;font-weight:bold;color:#111;word-break:normal;overflow-wrap:break-word;",
+ "bt_td":f"border:0;border-bottom:1px solid {LN};padding:8px 6px;text-align:left;vertical-align:top;color:#333;word-break:normal;overflow-wrap:break-word;",
+ "bt_td1":"font-weight:bold;color:#111;",
 }
 CUR=[""]
+NEXT_TOP=[False]  # 【配图】连排：上一张无图注、紧跟本张时为 True
 CN="一二三四五六七八九十"
-CHK={"narrow":[],"code_html":[],"leadin":[],"links":[],"cite":[],"ref_table":[],"refs":[],"ref_bad":[],"cap_prefix":[],"hit":[],"miss":[],"title":"","subtitle":"","cite_move":[],"code_styles":[],"dup":[],"grid":[]}
+CHK={"narrow":[],"code_html":[],"leadin":[],"links":[],"cite":[],"ref_table":[],"refs":[],"ref_bad":[],"cap_prefix":[],"hit":[],"miss":[],"title":"","subtitle":"","cite_move":[],"code_styles":[],"dup":[],"grid":[],"placeholder":[],"cite_card":[],"figs":[],"body_tables":[]}
 META={}  # 开头区元信息：tag / date / mins（阅读分钟）/ chapters（编号章节数）
 LINK_MAX=5
 def short_domain(url):
@@ -133,6 +140,21 @@ def figure(src,cap,shot=False,width=None):
         return f'<section style="{S["fig"]}"><span leaf=""><img src="{src}" data-w="{px}" width="{px}" style="{st}" alt=""></span>{c}</section>'
     w=imgw(src); dw=f' data-w="{w}"' if w else ""
     return f'<section style="{S["fig"]}"><span leaf=""><img src="{src}"{dw} style="{S["shot" if shot else "img"]}" alt=""></span>{c}</section>'
+def pair(items,gap=8):
+    """并排双图（2026-10-19f，19g 改成 2×2）：2 行 2 列的 table——第一行两张图，第二行两条图注；每格 50%，中间 gap px（每格 ≈169px）。
+    两张图等宽、顶部对齐（vertical-align:top），1px 浅灰边 + 4px 圆角；矮的那张下面留白，不拉伸、不裁。
+    图注一行 12px（本套 S["cap"]），自动去掉「来源：」前缀；图注行也是顶部对齐，两条图注在同一水平线上。
+    table 布局 + 内联样式（不用 flex/grid/div 布局、justify、渐变、font-family），粘贴进微信不会塌成单列。用法见 README「并排双图」"""
+    h=gap//2;ti="";tc=""
+    for j,(src,cap) in enumerate(items):
+        cap=clean_cap(cap);w=imgw(src);dw=f' data-w="{w}"' if w else ""
+        pl=0 if j==0 else h;pr=0 if j==len(items)-1 else h
+        ti+=(f'<td style="width:50%;padding:0 {pr}px 0 {pl}px;border:0;vertical-align:top;">'
+             f'<span leaf=""><img src="{src}"{dw} style="display:block;width:100%;max-width:100%;height:auto;margin:0;border:1px solid {LN};border-radius:4px;box-sizing:border-box;" alt=""></span></td>')
+        c=f'<p style="{S["cap"]}">{html.escape(cap)}</p>' if cap and SHOW_CAP[0] else ""
+        tc+=f'<td style="width:50%;padding:0 {pr}px 0 {pl}px;border:0;vertical-align:top;">{c}</td>'
+    CHK.setdefault("pairs",[]).append([x[0] for x in items])
+    return f'<section style="{S["fig"]}"><table style="width:100%;table-layout:fixed;border-collapse:collapse;margin:0;"><tbody><tr>{ti}</tr><tr>{tc}</tr></tbody></table></section>'
 def grid(items,cols=2,gap=6):
     """图片宫格（2026-10-15 起，gif_grid 字段）：table 实现（不用 flex/grid），默认 2 列；格子之间用 td 内边距留 gap px 小间距。
     每格一张纯图（不加边框、窗口、相框），下面一行图注（只写名称，390px 下单格内一行）；图片 max-width:100% 自适应，data-w 写原图宽度"""
@@ -149,6 +171,52 @@ def grid(items,cols=2,gap=6):
             td+=f'<td style="{st}"><span leaf=""><img src="{src}"{dw} style="{S["img"]}" alt=""></span>{c}</td>'
         tr+=f"<tr>{td}</tr>"
     return f'<section style="{S["fig"]}"><table style="width:100%;table-layout:fixed;border-collapse:collapse;margin:0;"><tbody>{tr}</tbody></table></section>'
+def cite_card(text,cfg):
+    """引文卡片（2026-10-19b 新增）：稿件里单独一行【引文卡片：原文 [xx]】= 把原文排成 01 的引用卡片（引用块同一套：浅灰底 + 左边 3px 珊瑚线，右侧小圆角），
+    卡片里只放原文和序号，不配中文、不加图注；原文一字不改（「…」省略号照留），[xx] 走 inline() 渲染成上标并计入 [cite]。
+    英文长句只在空格处折行：word-break:normal + overflow-wrap:break-word（只有单个词比整行还宽时才兜底断开），不准 break-all。
+    参与 [orphan]（引文卡，390px 下末行 ≤2 个词/字只报警，不自动调）"""
+    CHK["cite_card"].append(text); fb,ft=fit(cfg,re.sub(r"\s","",text)[:12])
+    # 句末「… [2]」这种序号前有空格时，把最后一个词（或省略号）+ 空格 + 序号包成 nowrap，序号不会单独掉到下一行（不改字）
+    # 尾巴至少带上前面两个真词（省略号、标点不算词），390px 下末行不会只剩「… [2]」
+    m=re.match(r"(.*?)((?:\S+\s+)+?(?:\[[A-Za-z]{0,2}\d+\])+)$",text,re.S)
+    if m:
+        toks=re.split(r"(?<=\s)(?=\S)",text[:len(text)-len(re.search(r"(?:\[[A-Za-z]{0,2}\d+\])+$",text)[0])])
+        k=len(toks);w=0
+        while k>1 and w<2:
+            k-=1;w+=bool(re.search(r"[A-Za-z0-9\u4e00-\u9fff]",toks[k]))
+        m=[None,"".join(toks[:k]),text[len("".join(toks[:k])):]] if k>0 else None
+    body=(inline(m[1],cfg)+f'<span style="white-space:nowrap;">{inline(m[2],cfg)}</span>') if m else inline(text,cfg)
+    return (f'<section style="margin:8px 0 22px;padding:12px 14px;background-color:{BG};border-left:3px solid {A};border-radius:0 8px 8px 0;{fb}">'
+      f'<p style="margin:0;font-size:14px;line-height:1.75;color:#444;text-align:left;word-break:normal;overflow-wrap:break-word;{ft}">{body}</p></section>')
+def placeholder(desc):
+    """配图占位（2026-10-19a 新增）：稿件里的【配图占位：说明】= 这里要放一张还没出的配图。排成醒目的占位框（珊瑚 2px 虚线框 + 浅珊瑚底，
+    顶部珊瑚实底小标签「配图待补」，下面原样放说明）；标记括号和「配图占位：」前缀不进成品。和【待补】一样，发布前必须换成正式配图；
+    publish 的 [todo] 一起计数。没有这个标记的稿件，输出和以前完全一样"""
+    CHK["placeholder"].append(desc)
+    return (f'<section style="margin:8px 0 22px;padding:14px 16px;border:2px dashed {A};border-radius:10px 4px 12px 4px;background-color:{AL};text-align:center;">'
+      f'<p style="margin:0 0 8px;line-height:1;"><span style="display:inline-block;padding:4px 10px;border-radius:4px 10px 4px 10px;background-color:{A};font-size:12px;line-height:1.4;font-weight:bold;color:#fff;letter-spacing:2px;">配图待补</span></p>'
+      f'<p style="margin:0;font-size:13px;line-height:1.7;color:#555;text-align:left;">{html.escape(desc)}</p></section>')
+def body_table(cells,cfg,cap=""):
+    """正文对比表格 v2（2026-10-19d）：Markdown 表格 → 01 风格小表（table 布局、内联样式、不用 flex）。
+    顶部 2px 珊瑚线，表头浅珊瑚底 13px 加粗；正文 14px / 1.6，只有横向细线，没有竖线；第一列加粗（厂商/方案名）；
+    中英文只在空格处折行（word-break:normal + overflow-wrap:break-word，不准 break-all）。适合 5 行 × 3 列左右，列再多手机上会挤。
+    单元格里的 **加粗** 照常加粗，[xx] 序号照常上标并计入 [cite]"""
+    CHK.setdefault("body_tables",[]).append((len(cells)-1,len(cells[0])))
+    # 2026-10-19e（复审 9 规格）：width:100% + table-layout:fixed，列宽写在表头 th 上（3 列默认 24% / 38% / 38%，layout-map "table_cols" 可改）；
+    # 单元格一律正常折行，不加 nowrap、不加 min-width；只有 layout-map "table_nowrap" 里列出的小段（如「3.3(e)」）包 nowrap 的 span，不拆开
+    n=len(cells[0]); cols=cfg.get("table_cols") or ([24,38,38] if n==3 else [round(100/n,2)]*n)
+    nw=sorted(cfg.get("table_nowrap",[]),key=len,reverse=True)
+    def cell(c):
+        h=inline(c,cfg)
+        for w in nw:
+            e=html.escape(w,quote=False)
+            if e in h:h=h.replace(e,f'<span style="white-space:nowrap;">{e}</span>');CHK.setdefault("bt_nowrap",[]).append(w)
+        return h
+    th="".join(f'<th style="width:{cols[j]}%;{S["bt_th"]}">{cell(c)}</th>' for j,c in enumerate(cells[0]))
+    tb="".join("<tr>"+"".join(f'<td style="{S["bt_td"]}{S["bt_td1"] if j==0 else ""}">{cell(c)}</td>' for j,c in enumerate(r))+"</tr>" for r in cells[1:])
+    c=f'<p style="{S["cap"]}">{html.escape(clean_cap(cap))}</p>' if cap and SHOW_CAP[0] else ""
+    return f'<section style="{S["bt_wrap"]}"><table style="{S["bt_table"]}"><thead><tr>{th}</tr></thead><tbody>{tb}</tbody></table>{c}</section>'
 def divider():
     d=lambda c,s:f'<span style="display:inline-block;width:{s}px;height:{s}px;border-radius:50%;background:{c};margin:0 5px;vertical-align:middle;"></span>'
     return f'<section style="text-align:center;margin:30px 0 8px;line-height:1;">{d("#ddd",5)}{d(A,7)}{d("#ddd",5)}</section>'
@@ -268,7 +336,9 @@ def url_html(u):
     // 这类连续符号中间不插；单段太长时由单元格的 overflow-wrap:break-word 兜底。"""
     parts=URL_BREAK.split(u); out=""
     for i,x in enumerate(parts):
-        out+=html.escape(x)
+        # 2026-10-19e：超过 24 个字符、中间没有断点的单段（如 40 位哈希）每 20 个字符插一个 <wbr>。
+        # 自动布局的表格算最小宽度时不看 overflow-wrap:break-word，不插的话这一段会把表格撑出 390px 屏宽
+        out+=("<wbr>".join(html.escape(x[k:k+20]) for k in range(0,len(x),20)) if i%2==0 and len(x)>24 else html.escape(x))
         if i%2==1 and i+1<len(parts) and parts[i+1] and not URL_BREAK.fullmatch(parts[i+1][:1]):out+="<wbr>"
     return out
 def ref_block(title,rows,cfg):
@@ -302,6 +372,7 @@ def _cc(lines,cap=""):
 REF_HEAD=re.compile(r"^#{1,3}\s*(引用|参考|来源|出处|资料)")
 def build(md,cfg):
     for k in CHK:CHK[k]=[]
+    NEXT_TOP[0]=False
     SHOW_CAP[0]=bool(cfg.get("show_captions",True))
     out=[];lines=[l.rstrip() for l in md.splitlines()];i=0
     after=cfg.get("insert_after",{});shots=cfg.get("shots",{})
@@ -356,7 +427,41 @@ def build(md,cfg):
         if m:
             info=shots.get(m[1],{});src=info.get("src","img/"+m[1].split("/")[-1])
             if src in used_src:CHK["dup"].append(src);continue
-            used_src.add(src);out.append(figure(src,info.get("cap",""),True));continue
+            # 并排双图（2026-10-19f）：layout-map "side_by_side": [["shots/A.png","shots/B.png"], …]，本张是某组第一张、下一个非空行正好是第二张的标记时，两张排成一行
+            _pr=next((g for g in cfg.get("side_by_side",[]) if g and g[0]==m[1].strip()),None)
+            if _pr:
+                j=i
+                while j<len(lines) and not lines[j].strip():j+=1
+                m2=re.match(r"【(?:截图|GIF|动图)：((?:shots|gifs)/[^，】]+)，?(.*)】$",lines[j]) if j<len(lines) else None
+                if m2 and m2[1].strip()==_pr[1]:
+                    info2=shots.get(m2[1],{});src2=info2.get("src","img/"+m2[1].split("/")[-1])
+                    used_src.add(src);used_src.add(src2);i=j+1
+                    _c1=m[2].strip() if cfg.get("cap_from_draft") and m[2].strip() else info.get("cap",m[2].strip())
+                    _c2=m2[2].strip() if cfg.get("cap_from_draft") and m2[2].strip() else info2.get("cap",m2[2].strip())
+                    out.append(pair([[src,_c1],[src2,_c2]]));continue
+                CHK.setdefault("pair_miss",[]).append(m[1].strip())
+            # cap_from_draft（2026-10-19g）：layout-map 写 true 时图注一律取定稿标记里的原文，shots 里的旧 cap 不再覆盖
+            _cap=m[2].strip() if cfg.get("cap_from_draft") and m[2].strip() else info.get("cap","")
+            used_src.add(src);out.append(figure(src,_cap,True,info.get("width")));continue  # shots 条目可写 "width": 300（2026-10-19b，竖图缩宽，同 insert_after 第三项）
+        m=re.match(r"【配图：([^，】]+)，?(.*)】$",l)  # 配图（2026-10-19d）：【配图：绝对路径或 img/…，图注】，图由 publish 复制进 img/，只用文件名；图注取逗号后面的文字（shots 里同名键可覆盖）
+        if m:
+            fn=m[1].strip().split("/")[-1];src="img/"+fn;info=shots.get(m[1].strip()) or shots.get(fn) or {}
+            if src in used_src:CHK["dup"].append(src);continue
+            used_src.add(src);CHK.setdefault("figs",[]).append(m[1].strip());cap=info.get("cap",m[2].strip())
+            h=figure(src,cap,False,info.get("width"))
+            # 连排（2026-10-19d）：前一张【配图】没有图注、下一个非空行紧跟着另一个【配图】时，两张上下连排：本张下边距 0，下一张上边距 0，共用图注写在后一张下面
+            j=i
+            while j<len(lines) and not lines[j].strip():j+=1
+            if not cap and j<len(lines) and re.match(r"【配图：",lines[j]):
+                h=h.replace(f'<section style="{S["fig"]}">','<section style="margin:8px 0 0;">',1);CHK.setdefault("fig_pairs",[]).append(fn);NEXT_TOP[0]=True
+            elif NEXT_TOP[0]:
+                h=h.replace(f'<section style="{S["fig"]}">','<section style="margin:0 0 22px;">',1)
+            NEXT_TOP[0]=bool(not cap and j<len(lines) and re.match(r"【配图：",lines[j]))
+            out.append(h);continue
+        m=re.match(r"【引文卡片：(.+)】$",l)  # 引文卡片（2026-10-19b）：原文排成 01 引用卡片
+        if m:CUR[0]=m[1];out.append(cite_card(m[1].strip(),cfg));continue
+        m=re.match(r"【配图占位：([^】]+)】$",l)  # 配图占位（2026-10-19a）：还没出图的配图位置，排成醒目占位框
+        if m:out.append(placeholder(m[1].strip()));continue
         m=re.match(r"【代码(?:卡片|块|窗)：([^，】]+)，?(.*)】$",l)  # 【代码块：说明】标记只用来定位，不进成品
         if m or l.startswith("```"):
             cap=cfg.get("code_cards",{}).get(m[1].strip(),"") if m else ""
@@ -406,6 +511,7 @@ def build(md,cfg):
                     refs.append((f"[{mm[1]}]",url))
                 CHK["refs"]+=refs; CHK["ref_table"].append(ref_title or "（无标题）")
                 out.append(ref_block(ref_title,refs,cfg)); ref_title=""; continue
+            if cfg.get("body_table")=="v2":out.append(body_table(cells,cfg,cfg.get("table_caps",{}).get(re.sub(r"\s","",rows[0])[:20],"")));continue
             h="".join(f'<th style="{S["th"]}'+('white-space:nowrap;width:1%;' if c.strip()=='编号' else '')+f'">{inline(c,cfg)}</th>' for c in cells[0])
             b="".join("<tr>"+"".join(f'<td style="{S["td"]}'+('white-space:nowrap;width:1%;' if j==0 and re.match(r'^M\d+$',c.strip()) else '')+f'">{inline(c,cfg)}</td>' for j,c in enumerate(r))+"</tr>" for r in cells[1:])
             out.append(f'<table style="{S["table"]}"><thead><tr>{h}</tr></thead><tbody>{b}</tbody></table>')

@@ -1,7 +1,7 @@
 {
   "protocolVersion": "0.3.0",
   "name": "gzh-chief-of-staff",
-  "description": "Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover. 编排者与用户主入口：派任务卡、汇总问题、交付 HTML + 封面",
+  "description": "Orchestrator and user entry: dispatches task cards, makes judgment calls for the user, delivers the full HTML. 编排者与用户主入口：派任务卡、按用户偏好替用户拍板、交付完整版 HTML",
   "url": "https://example.com/a2a/chief-of-staff",
   "version": "1.0.0",
   "capabilities": {
@@ -20,7 +20,7 @@
     {
       "id": "chief-of-staff",
       "name": "大管家 Chief of Staff",
-      "description": "Orchestrator and user entry: dispatches task cards, batches questions, delivers HTML + cover",
+      "description": "Orchestrator and user entry: dispatches task cards, makes judgment calls for the user, delivers the full HTML",
       "tags": [
         "wechat",
         "content",
