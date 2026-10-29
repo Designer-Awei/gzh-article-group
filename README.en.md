@@ -2,6 +2,8 @@
 
 [中文](README.md) | English
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/Designer-Awei/badge.svg)](https://hub.xerj.org/contributors/Designer-Awei)
+
 **Give it a topic, get back a WeChat article ready to paste.**
 
 - Topic to finished piece: one topic in, one laid-out HTML ready to paste into WeChat out (you make the cover yourself)

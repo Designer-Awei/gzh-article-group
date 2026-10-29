@@ -2,6 +2,8 @@
 
 中文 | [English](README.en.md)
 
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/Designer-Awei/badge.svg)](https://hub.xerj.org/contributors/Designer-Awei)
+
 **说一句选题，拿到一篇能直接粘进公众号的成品。**
 
 - 从选题到成品：一句选题进去，出来一份排好版、能直接粘进公众号的 HTML（封面你自己做）
