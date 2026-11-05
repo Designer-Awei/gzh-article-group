@@ -50,8 +50,50 @@ IP 形象与配图示例：
 ```
 
 ## 流程
-<p align="center"><img src="docs/showcase/workflow.png" width="900" alt="工作流"></p>
 
+```
+资讯官（01-news）
+  ↓ 每工作日 11:00 发早报
+灵感官（02-ideation）
+  ↓ 预备 2–3 个角度，等用户来聊
+【用户拍板】
+  ↓
+主编（08-editor）
+  ├─ 选题评分卡（总分 25，≥20 推荐）
+  └─ 研究简报（下游唯一解释源）
+【用户确认简报】
+  ↓
+素材官（03-research）
+  └─ 素材包（materials.md + shots/）
+  ↓
+文案官（04-copywriter）
+  └─ 初稿（按研究简报与素材包）
+【用户审稿或 AI 改写】
+  ↓
+视觉官（05-visual）
+  └─ 正文配图（封面用户自制）
+  ↓
+排版官（06-layout）
+  └─ HTML（可粘贴进公众号）
+  ↓
+审核官（07-reviewer）
+  └─ 验收报告（不通过打回）
+  ↓
+主编（08-editor）
+  └─ 反向审稿（找最弱三论点）
+【必要时打回返工】
+  ↓
+大管家（00-chief-of-staff）
+  └─ 交付 HTML + 摘要
+  ↓
+排期官（09-calendar）
+  └─ 更新排期表（已发布）
+```
+
+**关键节点**：
+- **主编研究简报**（用户拍板后、素材前）：下游围绕同一份简报协作
+- **主编反向审稿**（终交前）：主动找最薄弱的三个论点
+- **排期官三个时机**：开工记台账、工作日 17:00 推进日报、确认已发后改状态
 
 审核官不通过就用 rejection 打回负责角色，返工后重新验收；全部通过后，大管家只向用户交付一份完整版 `preview-standalone.html`（可直接粘贴进公众号），放进你本期的文件夹，摘要那句直接发在聊天里；封面由你自己做。中间要拍板的地方，大管家按你的偏好直接定，交付时附上关键取舍，只有涉及风控、核实不了的事实才来问你。
 
@@ -67,25 +109,30 @@ IP 形象与配图示例：
 ```
 gzh-article-group/
 ├── AGENTS.md  CONVENTIONS.md  README.md  README.en.md  LICENSE  .gitignore
+├── PUBLISHED.md             # 已发布文章记录
 ├── bots/
 │   ├── 00-chief-of-staff/   SKILL.md spec.md agent-card.json config/ init/SKILL.md
 │   ├── 01-news/             … config/news-sources.example.md
 │   ├── 02-ideation/
 │   ├── 03-research/
-│   ├── 04-copywriter/
+│   ├── 04-copywriter/       … config/copywriting-workflow.md human-voice-writing-guide.md
 │   ├── 05-visual/           … config/visual-style.md config/ip/
 │   ├── 06-layout/           … config/master/ config/styles/
-│   └── 07-reviewer/         … config/checklist.md
+│   ├── 07-reviewer/         … config/checklist.md
+│   ├── 08-editor/           … config/editor-protocol.md topic-scorecard.md research-brief-template.md
+│   └── 09-calendar/
 ├── projects/
 │   ├── README.md  _template/
 │   └── 2026-10-12-jev-valuation/
-│       ├── handoff.json  brief/ source/ draft/ illustration/ cover/ layout/ review/
+│       ├── handoff.json  brief/{topic,research-brief}  source/  draft/  illustration/  cover/  layout/  review/{验收,editor-redteam}
 ├── reference/               README.md writing-style.template.md corpus/{articles,links,notes,imgs}/ prefer/{links,articles,imgs}/
 ├── protocol/                task-card / delivery / rejection / handoff schemas + examples/
 ├── scripts/new-project.py
-└── docs/                    INIT.md showcase/
+└── docs/                    INIT.md HERMES.md 期次目录规范.md showcase/
 ```
 智能体请先读 [AGENTS.md](AGENTS.md)、[CONVENTIONS.md](CONVENTIONS.md) 和 [projects/README.md](projects/README.md)。
+
+**Hermes / 非 Grok Bot 环境重建**：见 [docs/HERMES.md](docs/HERMES.md)。
 
 ## 角色
 | 目录 | 角色 | 职责 |
@@ -98,6 +145,8 @@ gzh-article-group/
 | [05-visual](bots/05-visual/SKILL.md) | 视觉官 | 出风格统一的正文配图（封面你自己做） |
 | [06-layout](bots/06-layout/SKILL.md) | 排版官 | 把定稿、配图、截图排成可粘贴进公众号的 HTML |
 | [07-reviewer](bots/07-reviewer/SKILL.md) | 审核官 | 交付前最终验收，不过就打回 |
+| [08-editor](bots/08-editor/SKILL.md) | **主编** | **选题评分（25分制）、研究简报、反向审稿（找最弱三论点）** |
+| [09-calendar](bots/09-calendar/SKILL.md) | **排期官** | **排期台账、工作日推进日报、已发布状态更新** |
 
 ## A2A 消息示例（可选）
 审核官打回排版官（[rejection.schema.json](protocol/rejection.schema.json)）：

@@ -38,22 +38,47 @@
 | `docs/` | INIT.md 与 showcase/ 展示图 |
 
 ## 流转顺序
-01-news 每个工作日 11:00 发早报给用户，并自动推送给 02-ideation（单智能体模式下：开始聊选题时先读最新的 `news/YYYY-MM-DD.md`）→ 02-ideation 预备 2–3 个角度、等用户来聊，不主动打扰 → 用户拍板 → 00-chief-of-staff `scripts/new-project.py` 开项目并派任务（单智能体时即切换到该角色；多智能体时发 task-card） → 03-research → 04-copywriter → 05-visual → 06-layout → 07-reviewer →（通过）00-chief-of-staff 交付 `layout/` 的 HTML + `cover/` 的封面；（不通过）rejection 打回负责角色，返工后重新验收。每条消息追加到 `projects/<slug>/handoff.json`。
+
+```
+01-news 每工作日 11:00 发早报 → 02-ideation 预备 2–3 个角度
+  → 【用户拍板】
+  → 08-editor 选题评分 + 研究简报
+  → 【用户确认简报】
+  → 03-research 素材包
+  → 04-copywriter 初稿
+  → 【用户审稿】
+  → 05-visual 正文配图（封面用户自制）
+  → 06-layout HTML
+  → 07-reviewer 验收
+  → 08-editor 反向审稿（找最弱三论点）
+  → 【必要时打回返工】
+  → 00-chief-of-staff 交付 HTML + 摘要
+  → 09-calendar 更新排期表（已发布）
+```
+
+**关键变化**：
+- **主编（08-editor）**在用户拍板后、素材前，输出研究简报（下游唯一解释源）
+- **主编反向审稿**在终交前，主动找最薄弱三论点
+- **排期官（09-calendar）**只在三个时机更新：开工、工作日 17:00 推进日报、确认已发
+
+每条消息追加到 `projects/<slug>/handoff.json`。单智能体模式下：开始聊选题时先读最新的 `news/YYYY-MM-DD.md`，切换角色时读对应 `bots/NN-role/SKILL.md`。
 
 ## 谁能写哪里
 | 角色 | 可写 |
 |---|---|
 | 00-chief-of-staff | `projects/<slug>/README.md`、`handoff.json`；运行 new-project.py；初始化时写 `reference/` |
 | 01-news | `news/`（本地，不入库） |
-| 02-ideation | `news/angles/`（本地）、`projects/<slug>/brief/` |
+| 02-ideation | `news/angles/`（本地）、`projects/<slug>/brief/topic.md` |
 | 03-research | `projects/<slug>/source/` |
 | 04-copywriter | `projects/<slug>/draft/`；按用户反馈更新 `reference/writing-style.md` |
-| 05-visual | `projects/<slug>/illustration/`、`cover/`；`bots/05-visual/config/ip/` |
+| 05-visual | `projects/<slug>/illustration/`、`cover/`（封面实际由用户自制）；`bots/05-visual/config/ip/` |
 | 06-layout | `projects/<slug>/layout/` |
-| 07-reviewer | `projects/<slug>/review/`；只验收与打回，不改别人的产出 |
+| 07-reviewer | `projects/<slug>/review/`（验收报告）；只验收与打回，不改别人的产出 |
+| **08-editor** | **`projects/<slug>/brief/`（research-brief.md、topic-scorecard.md）、`projects/<slug>/review/editor-redteam.md`** |
+| **09-calendar** | **`config/editorial-calendar.md`；不写其他产出** |
 | 所有角色 | 追加 `handoff.json` 的 `log`；不改 `protocol/` 与他人 `config/`，除非用户要求 |
 
-分工归属：截图 → 03-research；文字 → 04-copywriter；配图与封面 → 05-visual；排版 → 06-layout。
+分工归属：截图 → 03-research；文字 → 04-copywriter；配图 → 05-visual（封面用户自制）；排版 → 06-layout；研究简报与反向审稿 → 08-editor；排期台账 → 09-calendar。
 
 ## 收到链接或截图
 任何角色收到用户发来的链接或截图：本人作品存入 `reference/corpus/`，用户说「这个风格不错」的第三方内容存入 `reference/prefer/`（links 写入对应 `links/links.md` 并记下用户原话），分不清就问；存好后通知 00-chief-of-staff 触发风格刷新（规则见 [reference/README.md](reference/README.md)）。prefer 只借鉴结构、节奏、钩子等形式，绝不复制他人观点或原句。所有角色都可写这两个文件夹。
